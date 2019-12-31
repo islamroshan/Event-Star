@@ -78,8 +78,8 @@
           <span>Event</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="login.html">Add Event</a>
-          <a class="dropdown-item" href="register.html">Event List</a>
+          <a class="dropdown-item" href="<?php echo base_url('event/add_event_controller'); ?>">Add Event</a>
+          <a class="dropdown-item" href="<?php echo base_url('event/event_list_controller'); ?>">Event List</a>
         </div>
       </li>
       <li class="nav-item dropdown">

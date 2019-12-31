@@ -134,4 +134,5 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array(
     'register_user_model',
+    'event_model',
 );
