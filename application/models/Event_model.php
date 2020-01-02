@@ -33,6 +33,21 @@ class Event_model extends CI_Model {
         }
     }
 
+    
+    //Get all events from database
+    public function get_all_events()
+    {
+        $query = $this->db->get('events');
+        if($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+
     //To get total rows
     public function get_total_events_rows()
     {

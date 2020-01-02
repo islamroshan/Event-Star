@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Event_list_controller extends CI_Controller {
+class Ticket_list_controller extends CI_Controller {
 
     //Initialize page
 	public function index()
@@ -13,7 +13,7 @@ class Event_list_controller extends CI_Controller {
 		  $limit_per_page = 3;
 		  $start = $this->uri->segment(4);
 
-          $data['events_list'] = $this->event_model->get_events($limit_per_page,$start);
+          $data['tickets_list'] = $this->ticket_model->get_ticket($limit_per_page,$start);
 		  $datakey = array(
 		  'key'  => 'show',
 		  );
@@ -24,24 +24,24 @@ class Event_list_controller extends CI_Controller {
         else 
 		{
 		  $keys = html_escape($this->input->post('keyword'));
-          $data['events_list'] = $this->event_model->search_tag($keys);
+          $data['tickets_list'] = $this->ticket_model->search_tag($keys);
 		}
 
-        $data['main_view'] = 'event/event_list';
+        $data['main_view'] = 'ticket/ticket_list';
         $this->load->view('layouts/main',$data);   
     }
 
     //Get all events
     public function get_event()
     {   
-        $data['main_view'] = 'event/event_list';
+        $data['main_view'] = 'ticket/ticket_list';
         $this->load->view('layouts/main',$data);
     }
 
     //Load Pagination
 	public function page()
 	{
-	    $query2 = $this->event_model->get_total_events_rows();
+	    $query2 = $this->ticket_model->get_total_ticket_rows();
 
 	    //Pagination library
 	    $this->load->library('pagination');

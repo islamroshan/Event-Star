@@ -50,7 +50,7 @@
     <ul class="navbar-nav ml-auto  ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         Admin <i class="fas fa-user-circle fa-fw"></i>
+        <?php echo $this->session->userdata('username'); ?> <i class="fas fa-user-circle fa-fw"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
           <a class="dropdown-item" href="#">Edit Profile</a>
@@ -63,7 +63,6 @@
   </nav>
 
   <div id="wrapper">
-
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
@@ -88,9 +87,8 @@
           <span>Ticket</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="login.html">Add Ticket</a>
-          <a class="dropdown-item" href="register.html">Edit Ticket</a>
-          <a class="dropdown-item" href="login.html">Ticket List</a>
+          <a class="dropdown-item" href="<?php echo base_url('ticket/add_ticket_controller'); ?>">Add Ticket</a>
+          <a class="dropdown-item" href="<?php echo base_url('ticket/ticket_list_controller'); ?>">Ticket List</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -99,9 +97,8 @@
           <span>Guest</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="login.html">Add Guest</a>
-          <a class="dropdown-item" href="register.html">Edit Guest</a>
-          <a class="dropdown-item" href="register.html">Guest List</a>
+          <a class="dropdown-item" href="<?php echo base_url('guest/add_guest_controller'); ?>">Add Guest</a>
+          <a class="dropdown-item" href="<?php echo base_url('guest/guest_list_controller'); ?>">Guest List</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -110,8 +107,7 @@
           <span>Invoice</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="login.html">Generate Invoice</a>
-          <a class="dropdown-item" href="register.html">View Invoice</a>
+          <a class="dropdown-item" href="<?php echo base_url('print/print_invoice_controller'); ?>">Print Invoice</a>
         </div>
       </li>
       <li class="nav-item">

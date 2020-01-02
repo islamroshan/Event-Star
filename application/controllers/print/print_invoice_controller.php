@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Event_list_controller extends CI_Controller {
+class Print_invoice_controller extends CI_Controller {
 
     //Initialize page
 	public function index()
@@ -10,10 +9,10 @@ class Event_list_controller extends CI_Controller {
 		if(html_escape($this->input->post('keyword')) == NULL)
 		{
 		  $this->page();
-		  $limit_per_page = 3;
+		  $limit_per_page = 10;
 		  $start = $this->uri->segment(4);
 
-          $data['events_list'] = $this->event_model->get_events($limit_per_page,$start);
+          $data['guests_list'] = $this->guest_model->get_guests($limit_per_page,$start);
 		  $datakey = array(
 		  'key'  => 'show',
 		  );
@@ -24,32 +23,27 @@ class Event_list_controller extends CI_Controller {
         else 
 		{
 		  $keys = html_escape($this->input->post('keyword'));
-          $data['events_list'] = $this->event_model->search_tag($keys);
+          $data['guests_list'] = $this->guest_model->search_tag($keys);
 		}
 
-        $data['main_view'] = 'event/event_list';
+        $data['main_view'] = 'print/view_invoice';
         $this->load->view('layouts/main',$data);   
     }
 
-    //Get all events
-    public function get_event()
-    {   
-        $data['main_view'] = 'event/event_list';
-        $this->load->view('layouts/main',$data);
-    }
+    
 
     //Load Pagination
 	public function page()
 	{
-	    $query2 = $this->event_model->get_total_events_rows();
+	    $query2 = $this->guest_model->get_total_guest_rows();
 
 	    //Pagination library
 	    $this->load->library('pagination');
 
 	    //Codeigniter Pagination
-	    $config['base_url'] = base_url('event/event_list_controller/index');
+	    $config['base_url'] = base_url('print/print_invoice_controller/index');
 	    $config['total_rows'] = $query2;
-	    $config['per_page'] = 3;
+	    $config['per_page'] = 10;
 
 	    //bootstrap styling
 	    $config['full_tag_open'] = '<ul class="pagination justify-content-end m-0 pt-3 ">';
