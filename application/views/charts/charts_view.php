@@ -9,7 +9,7 @@
   var myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ["Total Members", "Joined this Month", " Unpaid Members", "Ending Members","Total Plans"],
+      labels: ["Total Events", "Total Tickets", "Total Guest", "Guest This Month","Events This Month"],
       datasets: [{
         label: "Total",
         lineTension: 0.3,
@@ -22,7 +22,7 @@
         pointHoverBackgroundColor: "rgba(2,117,216,1)",
         pointHitRadius: 50,
         pointBorderWidth: 2,
-        data:[33,88,44,145,44,233],
+        data: <?php echo $chart_data ?>,
       }],
     },
     options: {
@@ -41,7 +41,7 @@
         yAxes: [{
           ticks: {
             min: 0,
-            max: 500,
+            max: 100,
             maxTicksLimit: 8
           },
           gridLines: {

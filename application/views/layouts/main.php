@@ -53,7 +53,7 @@
         <?php echo $this->session->userdata('username'); ?> <i class="fas fa-user-circle fa-fw"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#">Edit Profile</a>
+          <a class="dropdown-item" href="<?php echo base_url('admin_profile/edit_profile_controller'); ?>">Edit Profile</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
         </div>

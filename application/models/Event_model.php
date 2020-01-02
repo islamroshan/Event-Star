@@ -71,4 +71,14 @@ class Event_model extends CI_Model {
             return NULL;
         }
     }
+
+    //Find  total events
+	public function events_per_month()
+	{ 
+		$this->db->select('*');
+		$this->db->from('events');
+		$this->db->where('MONTH(event_date) =',date('m'));
+		$query = $this->db->get();
+		return $query->num_rows(); 
+	}
 }

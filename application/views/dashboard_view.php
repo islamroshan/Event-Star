@@ -1,3 +1,14 @@
+<?php if($this->session->userdata('is_logged_in')): ?>
+<?php   
+    $total = 0;
+    if (!empty($income_per_month)) { 
+    
+    foreach($income_per_month as $value) 
+    {
+        $total =  $value->paid_amount +  $total ;
+    }
+    }
+  ?>
 <!-- Icon Cards-->
 <div class="row">
     <div class="col-xl-3 col-sm-6 mb-3">
@@ -6,7 +17,8 @@
         <div class="card-body-icon">
             <i class="fas fa-fw fa-calendar-check"></i>
         </div>
-        <div class="mr-5">Total Events</div>
+        <div class="mr-5 font-weight-bold">$<?php  echo html_escape($total); ?></div>
+        <div class="mr-5">Income This Month</div>
         </div>
         <a class="card-footer text-white clearfix small z-1" href="#">
         <span class="float-left">View Details</span>
@@ -22,7 +34,8 @@
         <div class="card-body-icon">
             <i class="fas fa-fw fa-ticket-alt"></i>
         </div>
-        <div class="mr-5">Ticket Category</div>
+        <div class="mr-5 font-weight-bold"><?php  echo html_escape($events_per_month); ?></div>
+        <div class="mr-5">Events This Month</div>
         </div>
         <a class="card-footer text-white clearfix small z-1" href="#">
         <span class="float-left">View Details</span>
@@ -38,6 +51,7 @@
         <div class="card-body-icon">
              <i class="fas fa-fw fa-user-tie"></i>
         </div>
+        <div class="mr-5 font-weight-bold"><?php  echo html_escape($total_guest); ?></div>
         <div class="mr-5">Total Guests</div>
         </div>
         <a class="card-footer text-white clearfix small z-1" href="#">
@@ -52,16 +66,15 @@
     <div class="card text-white bg-danger o-hidden h-100">
         <div class="card-body">
         <div class="card-body-icon">
-            <i class="fas fa-fw fa-receipt"></i>
+          <i class="fas fa-fw fa-calendar-alt"></i>
         </div>
-        <div class="mr-5">Total Invoice</div>
+        <?php   
+            $curr_date = date('d-m-Y');
+            $date = date("F d ,Y", strtotime($curr_date));
+           ?>
+          <div class="mr-5 font-weight-bold"><?php echo  html_escape($date); ?></div>
+          <div class="mr-5"><?php echo html_escape(date("l, h:i A")); ?></div>
         </div>
-        <a class="card-footer text-white clearfix small z-1" href="#">
-        <span class="float-left">View Details</span>
-        <span class="float-right">
-            <i class="fas fa-angle-right"></i>
-        </span>
-        </a>
     </div>
     </div>
 </div>
@@ -76,3 +89,6 @@
 </div>
 <!-- Chart View -->
 <?php $this->load->view('charts/charts_view'); ?>
+<?php else: ?>
+<?php redirect('login_controller'); ?>
+<?php endif; ?>

@@ -90,10 +90,8 @@ class Guest_model extends CI_Model {
     //To get total rows
     public function get_total_guest_rows()
     {
-        $this->db->select('*,events.event_name','tickets.ticket_name');
+        $this->db->select('*');
         $this->db->from('guests');
-        $this->db->join('events','guests.event_name = events.event_id');
-        $this->db->join('tickets','guests.ticket_name = tickets.ticket_id');
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -116,4 +114,30 @@ class Guest_model extends CI_Model {
             return NULL;
         }
     }
+
+    //Find Total Payment per Month
+	public function payments_per_month()
+	{ 
+		$this->db->select('*');
+		$this->db->from('guests');
+		$this->db->where('MONTH(purchase_date) =',date('m'));
+		$query = $this->db->get();
+		if($query->num_rows() > 0 )
+		{
+			return $query->result();
+		} else 
+		{
+			return NULL;
+		}
+    }
+    
+      //Count Total Payment per Month
+	public function count_payments_per_month()
+	{ 
+		$this->db->select('*');
+		$this->db->from('guests');
+		$this->db->where('MONTH(purchase_date) =',date('m'));
+		$query = $this->db->get();
+		return $query->num_rows(); 
+	}
 }

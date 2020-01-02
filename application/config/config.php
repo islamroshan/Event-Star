@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+// To set the current time 
+date_default_timezone_set('Asia/Karachi');
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
