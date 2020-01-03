@@ -2,10 +2,18 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card  mb-3 ">
-      <div class="card-header"><i class="fas fa-table"></i> Add New Event</div>
+      <div class="card-header"><i class="fas fa-table"></i> Edit Event</div>
       <div class="card-body">
+      <?php 
+        foreach ($event_detail as $events) {
+            $detail = array(
+                'name' => $events->event_name,
+                'date' => $events->event_date               
+            );
+        }
+      ?>
         <!-- Form starts -->
-         <?php echo form_open('event/add_event_controller/add_event'); ?>
+         <?php echo form_open('event/edit_event_controller/update_event/'.$this->uri->segment(4).' '); ?>
             <div class="form-group row">
               <div class="col-md-2 col-form-label">
                  <?php  echo form_label('Event Name','eventname'); ?>
@@ -15,6 +23,7 @@
                     $data = array(
                       'class' => 'form-control',
                       'name' => 'eventname',
+                      'value' => $detail['name'],
                       'id' => 'eventname',
                       'placeholder' => 'Event Name' 
                     );
@@ -33,7 +42,7 @@
                       'name' => 'eventdate',
                       'id' => 'eventdate',
                       'type' => 'date',
-                      'value' => date('Y-m-d'),
+                      'value' => $detail['date'],
                       'placeholder' => '' 
                     );
                     echo form_input($data);    
@@ -45,8 +54,8 @@
                  <?php 
                     $data = array(
                       'class' => 'btn btn-primary',
-                      'name' => 'add_event',
-                      'value' => 'Add Event'
+                      'name' => 'update_event',
+                      'value' => 'Edit Event'
                     );
                     echo form_submit($data);    
                  ?>

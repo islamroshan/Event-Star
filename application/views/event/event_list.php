@@ -25,6 +25,7 @@
           <th>S.No</th>
           <th>Event id</th>
           <th>Event Name</th>
+          <th>Event Date</th>
           <th>Action</th>
         </tr>
        </thead>
@@ -33,6 +34,7 @@
            <th>S.No</th>
            <th>Event id</th>
            <th>Event Name</th>
+           <th>Event Date</th>
            <th>Action</th>
          </tr>
        </tfoot>
@@ -45,10 +47,11 @@
              echo '<tr>';
              echo '<td>'. html_escape($i) .'</td>';
              echo '<td>'. html_escape($events->event_id).'</td>';
-             echo '<td>'. html_escape($events->event_name).' days</td>';
+             echo '<td>'. html_escape($events->event_name).'</td>';
+             echo '<td>'. html_escape($events->event_date).'</td>';
              echo '<td>
                     <div class="btn-group btn-group"> 
-                       <a href="'.base_url().'add_plan_controller/get_plan_by_id/'. $events->event_id  .'" class="btn btn-warning btn-sm">Edit Event</a>
+                       <a href="'.base_url().'event/edit_event_controller/edit_event/'. $events->event_id  .'" class="btn btn-warning btn-sm">Edit Event</a>
                        <a href="'.base_url().'add_plan_controller/delete_plan/'.$events->event_id.'" class="btn btn-danger btn-sm" onClick="return doconfirm()"> Delete Event</a>
                      </div>
                    </td>';

@@ -20,6 +20,18 @@
 </head>
 
 <body class="bg-dark">
+<?php 
+    foreach ($company_detail as $companys) 
+    {
+      $company = array(
+        'company_name' => $companys->company_name,
+        'company_address' => $companys->company_address,
+        'company_contact' => $companys->company_contact,
+        'company_logo' => $companys->company_logo,
+        'currency' => $companys->currency,
+      );
+    }
+  ?>
   <?php 
     foreach ($guest_detail as $guest) 
     {
@@ -43,9 +55,16 @@
         INVOICE # <?php echo html_escape($guests['guest_id']); ?>
       </div>
       <div class="card-body pb-0  border-dark ">
-        <div class="row">
-          <div class="col-md-12">
-          <img src="<?php echo base_url();?>image/logo.png" width="300" class="float-right"  alt="No Preview">
+      <div class="row">
+          <div class="col-md-8">
+            <ul class="list-unstyled  ">
+              <li><?php echo html_escape($company['company_name']);?></li>
+              <li><?php echo html_escape($company['company_address']); ?></li>
+              <li>Mobile: <?php echo html_escape($company['company_contact']);  ?></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+           <img src="<?php echo base_url();?>image/<?php echo html_escape($company['company_logo']); ?>" width="120" class=" float-right"  alt="No Preview">
           </div>
         </div>
         <div class="table-responsive">
@@ -78,15 +97,15 @@
             <tbody>
               <tr>
                 <th>Total :</th>
-                <td>$<?php echo html_escape($guests['total_amount']); ?></td>
+                <td><?php echo $company['currency']; ?> <?php echo html_escape($guests['total_amount']); ?></td>
               </tr>
               <tr>
                 <th>Paid :</th>
-                <td>$<?php echo html_escape($guests['paid_amount']); ?></td>
+                <td><?php echo $company['currency'];?> <?php echo html_escape($guests['paid_amount']); ?></td>
               </tr>
               <tr>
                 <th>Due :</th>
-                <td>$<?php echo html_escape($guests['remaining_due']); ?></td>
+                <td><?php echo $company['currency'];?> <?php echo html_escape($guests['remaining_due']); ?></td>
               </tr>
             </tbody>
           </table>

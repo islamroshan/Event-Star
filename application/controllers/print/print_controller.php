@@ -10,7 +10,8 @@ class Print_controller extends CI_Controller {
 	
 	//Print Invoice
 	public function print($guest_id)
-	{
+	{	
+		$data['company_detail'] = $this->setting_model->get_settings();
 		$data['guest_detail'] = $this->guest_model->get_guest_by_id($guest_id);
 		$this->load->view('print/print_invoice',$data);
 	}

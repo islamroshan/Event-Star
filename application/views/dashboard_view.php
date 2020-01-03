@@ -8,6 +8,7 @@
         $total =  $value->paid_amount +  $total ;
     }
     }
+    
   ?>
 <!-- Icon Cards-->
 <div class="row">
@@ -15,9 +16,9 @@
     <div class="card text-white bg-primary o-hidden h-100">
         <div class="card-body">
         <div class="card-body-icon">
-            <i class="fas fa-fw fa-calendar-check"></i>
+            <i class="fas fa-fw fa-money-bill-alt"></i> 
         </div>
-        <div class="mr-5 font-weight-bold">$<?php  echo html_escape($total); ?></div>
+        <div class="mr-5 font-weight-bold"><?php echo html_escape($currecny); ?> <?php  echo html_escape($total); ?></div>
         <div class="mr-5">Income This Month</div>
         </div>
         <a class="card-footer text-white clearfix small z-1" href="#">
@@ -32,7 +33,7 @@
     <div class="card text-white bg-warning o-hidden h-100">
         <div class="card-body">
         <div class="card-body-icon">
-            <i class="fas fa-fw fa-ticket-alt"></i>
+            <i class="fas fa-fw fa-calendar-check"></i>
         </div>
         <div class="mr-5 font-weight-bold"><?php  echo html_escape($events_per_month); ?></div>
         <div class="mr-5">Events This Month</div>

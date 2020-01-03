@@ -27,8 +27,14 @@
 <body id="page-top">
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-    <a class="navbar-brand mr-1" href="index.html">Event Star</a>
+  <?php 
+    $ems_settings = $this->setting_model->get_settings();
+      foreach ($ems_settings as $name) 
+      {
+        $company_name = html_escape($name->company_name);
+      }
+     ?>
+    <a class="navbar-brand mr-1" href="<?php echo base_url('dashboard_controller');?>"><?php echo $company_name;?></a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -111,7 +117,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="<?php echo base_url('settings/settings_controller'); ?>">
           <i class="fas fa-cogs"></i>
           <span>Settings</span>
         </a>

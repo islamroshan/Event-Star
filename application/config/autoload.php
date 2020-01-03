@@ -138,4 +138,5 @@ $autoload['model'] = array(
     'ticket_model',
     'guest_model',
     'edit_profile_model',
+    'setting_model',
 );

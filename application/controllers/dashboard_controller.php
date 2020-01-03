@@ -3,7 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard_controller extends CI_Controller {
 	public function index()
-	{
+	{	
+		$data['currecny'] = $this->setting_model->get_currency();
 		$data['total_events'] = $this->event_model->get_total_events_rows();
 		$data['events_per_month'] = $this->event_model->events_per_month();
 		$data['total_guest'] = $this->guest_model->get_total_guest_rows();
