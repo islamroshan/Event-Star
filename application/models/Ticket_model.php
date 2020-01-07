@@ -67,6 +67,7 @@ class Ticket_model extends CI_Model {
             return NULL;
         }
     }
+    
     //To get total rows
     public function get_total_ticket_rows()
     {

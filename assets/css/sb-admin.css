@@ -10668,13 +10668,13 @@ body {
   }
 }
 
-.upper-nav {
-  background-color:#e83e8c;
+.login-color {
+	background-color: #007bffc7 !important;
 }
 
 .sidebar {
   width: 90px !important;
-  background-color:#e83e8ddc;
+  background-color:#007bffc7;
   min-height: calc(100vh - 56px);
 }
 

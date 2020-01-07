@@ -29,7 +29,7 @@
 
 <body id="page-top">
 
-  <nav class="navbar navbar-expand navbar-dark upper-nav static-top">
+  <nav class="navbar navbar-expand navbar-dark bg-primary static-top">
   <?php 
     $ems_settings = $this->setting_model->get_settings();
       foreach ($ems_settings as $name) 
@@ -136,7 +136,6 @@
 
     </div>
     <!-- /.content-wrapper -->
-
   </div>
   <!-- /#wrapper -->
 

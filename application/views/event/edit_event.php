@@ -5,11 +5,12 @@
       <div class="card-header"><i class="fas fa-table"></i> Edit Event</div>
       <div class="card-body">
       <?php 
-        foreach ($event_detail as $events) {
-            $detail = array(
-                'name' => $events->event_name,
-                'date' => $events->event_date               
-            );
+        foreach ($event_detail as $events) 
+        {
+          $detail = array(
+              'name' => $events->event_name,
+              'date' => $events->event_date               
+          );
         }
       ?>
         <!-- Form starts -->
@@ -53,7 +54,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-outline-danger',
+                      'class' => 'btn btn-outline-primary',
                       'name' => 'update_event',
                       'value' => 'Edit Event'
                     );

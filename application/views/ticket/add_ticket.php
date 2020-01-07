@@ -20,6 +20,7 @@
           </button>
       </div>    
     <?php endif;?>
+
     <div class="card  mb-3 ">
       <div class="card-header"><i class="fas fa-table"></i> Add New Ticket</div>
       <div class="card-body">
@@ -82,8 +83,7 @@
                 <label for="selectevent">Select Event</label>
               </div>
                <div class="col-md-4 col-md-offset-4">  
-               <select class="selectpicker form-control" name="selectevent" data-live-search="true">  
-  
+                    <select class="selectpicker form-control" name="selectevent" data-live-search="true">  
                         <option value="">Select</option>
                         <?php   
                           foreach ($events as $event) {
@@ -98,7 +98,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-outline-danger',
+                      'class' => 'btn btn-outline-primary',
                       'name' => 'add_ticket',
                       'value' => 'Add Ticket'
                     );

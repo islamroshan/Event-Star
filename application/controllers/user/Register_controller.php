@@ -33,7 +33,6 @@ class Register_controller extends CI_Controller {
 	// Login to dashboard
 	public function login_user()
 	{
-		
 		$user_id = $this->register_user_model->login();
 		$this->register_user_model->set('user_id',$user_id);
 		$data = $this->register_user_model->get_user();
@@ -52,7 +51,6 @@ class Register_controller extends CI_Controller {
 		{
 		    $email = html_escape($this->input->post('useremail'));
 			$user_data = array(
-				 
 				'email' => $email,
 				'user_id' => $user_id,
 				'is_logged_in' => true

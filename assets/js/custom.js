@@ -5,7 +5,7 @@
 //Confirm Before Delete
 $(document).ready(function(){
   $(".deleteitem").click(function(){
-    if (!confirm("Do you want to delete")){
+    if (!confirm("Do you want to delete!")){
       return false;
     }
   });

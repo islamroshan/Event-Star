@@ -32,8 +32,6 @@ class Print_invoice_controller extends CI_Controller {
         $this->load->view('layouts/main',$data);   
     }
 
-    
-
     //Load Pagination
 	public function page()
 	{

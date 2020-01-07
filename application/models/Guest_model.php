@@ -68,9 +68,7 @@ class Guest_model extends CI_Model {
         }
     }
     
-
     //Get guest by id
-     //Get guest from database
      public function get_guest_by_id($guest_id)
      {
          $this->db->select('*,events.event_name','tickets.ticket_name','tickets.ticket_id');
@@ -88,6 +86,7 @@ class Guest_model extends CI_Model {
              return NULL;
          }
      }
+     
     //To get total rows
     public function get_total_guest_rows()
     {

@@ -1,5 +1,6 @@
 <?php
 class Edit_profile_model extends CI_Model {   
+	
     //To Get User
 	public function get_user($user_id)
 	{

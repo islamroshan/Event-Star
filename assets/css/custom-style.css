@@ -2,18 +2,11 @@
 	max-width: 2480px;
 }
 
-.letter-space {
-	letter-spacing:6px;
-}
-
 .card-width {
 	max-width: 100px;
 }
 
-.primary-color {
-	background-color: #F0A7BC;
-}
 .form-control:focus {
-	border-color: #e83e8c;
+	border-color: #007bffc7;
 	box-shadow: none;
   }

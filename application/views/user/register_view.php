@@ -16,16 +16,17 @@
 
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url(); ?>assets/css/sb-admin.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/css/custom-style.css" rel="stylesheet">
 
 </head>
 
-<body class="bg-info">
+<body class="login-color">
 
   <div class="container">
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Register an Account</div>
       <div class="card-body">
-        <?php echo validation_errors(); ?>
+         <?php echo '<span class="text-danger">'. validation_errors() .'</span>'; ?>
         <!-- <form> -->
           <?php echo form_open('user/register_controller/register_user'); ?>
                <div class="form-group">

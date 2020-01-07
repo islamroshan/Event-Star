@@ -53,7 +53,7 @@
              echo '<td>'.html_escape($currency).' '. html_escape($guests->ticket_rate).' / '.html_escape($currency).' '. html_escape($guests->paid_amount).' </td>';
              echo '<td>'.html_escape($currency).' '. html_escape($guests->remaining_due).'</td>';
              echo '<td>
-                     <a href="'.base_url().'print/print_controller/print/'. $guests->guest_id .'" class="btn btn-outline-danger">Print Invoice</a>
+                     <a href="'.base_url().'print/print_controller/print/'. $guests->guest_id .'" class="btn btn-outline-primary">Print Invoice</a>
                    </td>';
              echo '</tr>';
            }

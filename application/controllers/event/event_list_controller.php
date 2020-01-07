@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Event_list_controller extends CI_Controller {
 
     //Initialize page
