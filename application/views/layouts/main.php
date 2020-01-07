@@ -20,13 +20,16 @@
     <link href="<?php echo base_url(); ?>assets/css/sb-admin.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/custom-style.css" rel="stylesheet">
 
+    <link href="<?php echo base_url(); ?>assets/select-box/css/bootstrap-select.css" rel="stylesheet">
+
     <!-- Charts  -->
     <script src="<?php echo base_url(); ?>assets/vendor/chart.js/Chart.min.js"></script>
+
 </head>
 
 <body id="page-top">
 
-  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+  <nav class="navbar navbar-expand navbar-dark upper-nav static-top">
   <?php 
     $ems_settings = $this->setting_model->get_settings();
       foreach ($ems_settings as $name) 
@@ -39,18 +42,6 @@
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
-
-    <!-- Navbar Search -->
-    <!-- <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form> -->
 
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto  ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -137,8 +128,8 @@
       <!-- Sticky Footer -->
       <footer class="sticky-footer ">
         <div class="container my-auto  ">
-          <div class="h6 text-center  ">
-            <span>Event Star, A Complete Event Management & Administration System</span>
+          <div class="h6 text-center   ">
+            <span>Event Management & Administration System</span>
           </div>
         </div>
       </footer>
@@ -191,6 +182,9 @@
 
     <!-- Demo scripts for this page-->
     <script src="<?php echo base_url(); ?>assets/js/demo/datatables-demo.js"></script>
+    
+    <!-- Ajax select box -->
+    <script src="<?php echo base_url(); ?>assets/select-box/js/bootstrap-select.js"></script>
 
   </body>
 </html>

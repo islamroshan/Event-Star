@@ -1,7 +1,26 @@
 <?php if($this->session->userdata('is_logged_in')): ?>
 <div class="row">
   <div class="col-md-12">
-    <div class="card  mb-3 ">
+  <!-- if updated successfully  -->
+  <?php if($this->session->flashdata('guest_added')): ?>
+    <div class="alert alert-success alert-dismissible fade show " role="alert">
+        <?php echo $this->session->flashdata('guest_added'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>    
+    <?php endif;?>
+
+    <!-- if deleted successfully  -->
+    <?php if($this->session->flashdata('guest_not_added')): ?>
+    <div class="alert alert-danger alert-dismissible fade show " role="alert">
+        <?php echo $this->session->flashdata('guest_not_added'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>    
+    <?php endif;?>
+    <div class="card mb-3 ">
       <div class="card-header"><i class="fas fa-table"></i> Add New Guest</div>
       <div class="card-body">
         <!-- Form starts -->
@@ -116,8 +135,7 @@
                 <label for="eventname">Event Name</label>
               </div>
                <div class="col-md-4 col-md-offset-4">  
-                    <select id="plan" name="eventname" class="form-control">  
-                        <option value="">Select</option>
+                 <select class="selectpicker form-control" name="eventname" data-live-search="true">  
                         <?php   
                           foreach ($events as $event) {
                             echo '<option value="'. html_escape($event->event_id) .'" >'. html_escape($event->event_name) .'</option>';
@@ -132,11 +150,12 @@
                 <label for="ticketname">Ticket Name</label>
               </div>
                <div class="col-md-4 col-md-offset-4">  
-                    <select id="ticketname" name="ticketname" class="form-control">  
-                        <option value="">Select</option>
-                        <?php   
+                    <select class="selectpicker form-control" name="ticketname" data-live-search="true">
+                  
+                      <?php   
                           foreach ($tickets as $ticket) {
-                            echo '<option value="'. html_escape($ticket->ticket_id) .'" >'. html_escape($ticket->ticket_name) .' ($'.html_escape($ticket->ticket_price).')  Total Tickets : '. html_escape($ticket->ticket_limit) .' </option>';
+                            
+                            echo '<option data-subtext="Total Tickets : '. html_escape($ticket->ticket_limit) .'" value="'. html_escape($ticket->ticket_id) .'" >'. html_escape($ticket->ticket_name) .' ('.html_escape($currency).' '.html_escape($ticket->ticket_price).')   </option>';
                           }
                          ?>
                     </select>
@@ -165,7 +184,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-primary',
+                      'class' => 'btn btn-outline-danger',
                       'name' => 'add_guest',
                       'value' => 'Add Guest'
                     );

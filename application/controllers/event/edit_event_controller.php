@@ -18,6 +18,21 @@ class Edit_event_controller extends CI_Controller {
         $query = $this->event_model->update_event($event_detail,$event_id);
         if($query)
         {
+            $this->session->set_flashdata('event_updated','Event Has Been Updated');
+            redirect('event/event_list_controller');
+        }
+        else
+        {
+            redirect('dashboard_controller');
+        }
+    }
+    
+    //Delete From Database
+    public function delete_event($event_id)
+    {
+        if($this->event_model->delete_event($event_id))
+        {
+            $this->session->set_flashdata('event_deleted','Event Has Been Deleted');
             redirect('event/event_list_controller');
         }
         else

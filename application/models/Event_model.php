@@ -87,7 +87,25 @@ class Event_model extends CI_Model {
         }
     }
 
-    //Find  total events
+    //Search event per month in database
+    public function event_month_search_tag($search_keyword)
+    {
+        $this->db->select('*');
+		$this->db->from('events');
+		$this->db->where('MONTH(event_date) =',date('m'));
+        $this->db->like('event_name',$search_keyword);
+        $query = $this->db->get();
+        if($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+    
+    //Count total events per month 
 	public function events_per_month()
 	{ 
 		$this->db->select('*');
@@ -96,7 +114,26 @@ class Event_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->num_rows(); 
     }
+
+    //Find total events per month
+	public function find_event_per_month($limit,$start)
+	{ 
+        $this->db->limit($limit,$start);
+		$this->db->select('*');
+		$this->db->from('events');
+		$this->db->where('MONTH(event_date) =',date('m'));
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return NULL;
+        }
+    }
     
+    //Update Events
     public function update_event($event_details,$event_id)
     {
         $data = array(
@@ -105,6 +142,14 @@ class Event_model extends CI_Model {
         );
         $this->db->where('event_id',$event_id);
         $this->db->update('events',$data);
+        return TRUE;
+    }
+
+    //Delet From Database
+    public function delete_event($event_id)
+    {
+        $this->db->where('event_id',$event_id);
+        $this->db->delete('events');
         return TRUE;
     }
 }

@@ -1,5 +1,27 @@
 <?php if($this->session->userdata('is_logged_in')): ?>
+<div class="row">
+  <div class="col-md-12">
+      <!-- if updated successfully  -->
+      <?php if($this->session->flashdata('guest_updated')): ?>
+      <div class="alert alert-success alert-dismissible fade show " role="alert">
+          <?php echo $this->session->flashdata('guest_updated'); ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>    
+    <?php endif;?>
 
+     <!-- if deleted successfully  -->
+     <?php if($this->session->flashdata('guest_deleted')): ?>
+      <div class="alert alert-danger alert-dismissible fade show " role="alert">
+          <?php echo $this->session->flashdata('guest_deleted'); ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>    
+    <?php endif;?>
+  </div>
+</div>
 <!-- DataTables -->
 <div class="card mb-3">
  <div class="card-header">
@@ -12,7 +34,7 @@
            <div class="input-group mb-3 input-group">
              <input type="text" name="keyword" class="form-control" placeholder="Search here" aria-label="Search here" aria-describedby="button-addon2">
              <div class="input-group-append">
-               <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+               <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
              </div>
            </div>
         </form>
@@ -27,6 +49,7 @@
           <th>Phone</th>
           <th>Event / Ticket</th>
           <th>Total / Paid</th>
+          <th>Payment Date</th>
           <th>Due Amount</th>
           <th>Action</th>
         </tr>
@@ -38,6 +61,7 @@
           <th>Phone</th>
           <th>Event / Ticket</th>
           <th>Total / Paid</th>
+          <th>Payment Date</th>
           <th>Due Amount</th>
           <th>Action</th>
          </tr>
@@ -53,12 +77,13 @@
              echo '<td>'. html_escape($guests->guest_name).'</td>';
              echo '<td>'. html_escape($guests->guest_number).'</td>';
              echo '<td>'. html_escape($guests->event_name).' / '.html_escape($guests->ticket_name).'</td>';
-             echo '<td>$'. html_escape($guests->ticket_rate).' / $'. html_escape($guests->paid_amount).' </td>';
-             echo '<td>$'. html_escape($guests->remaining_due).'</td>';
+             echo '<td>'. html_escape($currency).' '.html_escape($guests->ticket_rate).' / '. html_escape($currency).' '. html_escape($guests->paid_amount).' </td>';
+             echo '<td>'. html_escape($guests->purchase_date).'</td>';
+             echo '<td>'. html_escape($currency).' '. html_escape($guests->remaining_due).'</td>';
              echo '<td>
                     <div class="btn-group btn-group"> 
-                       <a href="'.base_url().'add_plan_controller/get_plan_by_id/'. $guests->guest_id  .'" class="btn btn-warning btn-sm">Edit Event</a>
-                       <a href="'.base_url().'add_plan_controller/delete_plan/'.$guests->guest_id.'" class="btn btn-danger btn-sm" onClick="return doconfirm()"> Delete Event</a>
+                       <a href="'.base_url().'guest/edit_guest_controller/edit_guest/'. $guests->guest_id  .'" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                       <a href="'.base_url().'guest/edit_guest_controller/delete_guest/'.$guests->guest_id.'" class="btn btn-danger btn-sm deleteitem"><i class="fas fa-trash-alt"></i></a>
                      </div>
                    </td>';
              echo '</tr>';

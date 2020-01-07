@@ -21,7 +21,7 @@
         <div class="mr-5 font-weight-bold"><?php echo html_escape($currecny); ?> <?php  echo html_escape($total); ?></div>
         <div class="mr-5">Income This Month</div>
         </div>
-        <a class="card-footer text-white clearfix small z-1" href="#">
+        <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('print/print_invoice_controller'); ?>">
         <span class="float-left">View Details</span>
         <span class="float-right">
             <i class="fas fa-angle-right"></i>
@@ -38,7 +38,7 @@
         <div class="mr-5 font-weight-bold"><?php  echo html_escape($events_per_month); ?></div>
         <div class="mr-5">Events This Month</div>
         </div>
-        <a class="card-footer text-white clearfix small z-1" href="#">
+        <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('event/event_month_controller'); ?>">
         <span class="float-left">View Details</span>
         <span class="float-right">
             <i class="fas fa-angle-right"></i>
@@ -55,7 +55,7 @@
         <div class="mr-5 font-weight-bold"><?php  echo html_escape($total_guest); ?></div>
         <div class="mr-5">Total Guests</div>
         </div>
-        <a class="card-footer text-white clearfix small z-1" href="#">
+        <a class="card-footer text-white clearfix small z-1" href="<?php echo base_url('guest/guest_list_controller'); ?>">
         <span class="float-left">View Details</span>
         <span class="float-right">
             <i class="fas fa-angle-right"></i>

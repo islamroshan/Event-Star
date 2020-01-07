@@ -4,13 +4,12 @@
 "use strict";
 //Confirm Before Delete
 $(document).ready(function(){
-  $(".deleteMem").click(function(){
+  $(".deleteitem").click(function(){
     if (!confirm("Do you want to delete")){
       return false;
     }
   });
 });
-
 
 // Print Button To Print Invoice
 $('#btnPrint').click(function(){

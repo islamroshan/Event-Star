@@ -67,16 +67,17 @@ class Guest_model extends CI_Model {
             return NULL;
         }
     }
+    
 
     //Get guest by id
      //Get guest from database
      public function get_guest_by_id($guest_id)
      {
-         $this->db->select('*,events.event_name','tickets.ticket_name');
+         $this->db->select('*,events.event_name','tickets.ticket_name','tickets.ticket_id');
          $this->db->from('guests');
-         $this->db->where('guest_id',$guest_id);
          $this->db->join('events','guests.event_name = events.event_id');
          $this->db->join('tickets','guests.ticket_name = tickets.ticket_id');
+         $this->db->where('guest_id',$guest_id);
          $query = $this->db->get();
          if($query->num_rows() > 0)
          {
@@ -131,7 +132,7 @@ class Guest_model extends CI_Model {
 		}
     }
     
-      //Count Total Payment per Month
+    //Count Total Payment per Month
 	public function count_payments_per_month()
 	{ 
 		$this->db->select('*');
@@ -139,5 +140,45 @@ class Guest_model extends CI_Model {
 		$this->db->where('MONTH(purchase_date) =',date('m'));
 		$query = $this->db->get();
 		return $query->num_rows(); 
-	}
+    }
+    
+    //Update Guest
+    public function update_guest($guests,$guest_id)
+    {
+        $paid_amount = $guests['pamount'];
+        $ticket_id =  $guests['ticketid'];
+
+        $get_ticket_detail = $this->db->where('ticket_id', $ticket_id);
+        $get_ticket_detail = $this->db->get('tickets');
+       
+        //Find payable amount
+        $ticket_rate =  $get_ticket_detail->row(2)->ticket_price;
+        $payable_amount = $ticket_rate - $paid_amount;
+       
+
+        //Insert into guest table
+        $data = array(
+            'guest_name' => html_escape($guests['guestname']),
+            'guest_number' => html_escape($guests['phone']),
+            'guest_address' => html_escape($guests['address']),
+            'guest_email' => html_escape($guests['email']),
+            'purchase_from' => html_escape($guests['purchase']),
+            'purchase_date' => html_escape($guests['purchasedate']),
+            'ticket_rate' => html_escape($ticket_rate),
+            'paid_amount' => html_escape($paid_amount),
+            'remaining_due' => html_escape($payable_amount),
+        ); 
+        $this->db->where('guest_id',$guest_id);
+        $this->db->update('guests',$data);
+    
+        return TRUE;
+    }
+
+    //Delet From Database
+    public function delete_guest($guest_id)
+    {
+        $this->db->where('guest_id',$guest_id);
+        $this->db->delete('guests');
+        return TRUE;
+    }
 }

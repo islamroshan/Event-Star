@@ -11,7 +11,8 @@ class Guest_list_controller extends CI_Controller {
 		  $this->page();
 		  $limit_per_page = 10;
 		  $start = $this->uri->segment(4);
-
+		
+		  $data['currency'] = $this->setting_model->get_currency();
           $data['guests_list'] = $this->guest_model->get_guests($limit_per_page,$start);
 		  $datakey = array(
 		  'key'  => 'show',
@@ -23,6 +24,7 @@ class Guest_list_controller extends CI_Controller {
         else 
 		{
 		  $keys = html_escape($this->input->post('keyword'));
+		  $data['currency'] = $this->setting_model->get_currency();
           $data['guests_list'] = $this->guest_model->search_tag($keys);
 		}
 

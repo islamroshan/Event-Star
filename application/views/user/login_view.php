@@ -19,12 +19,12 @@
 
 </head>
 
-<body class="bg-dark">
+<body class="bg-info">
 
   <div class="container">
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
-      <div class="card-body">
+      <div class="card-body ">
          <?php echo form_open('user/register_controller/login_user'); ?>
            <div class="form-group">
               <div class="form-label-group">

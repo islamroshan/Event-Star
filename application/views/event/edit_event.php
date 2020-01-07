@@ -1,7 +1,7 @@
 <?php if($this->session->userdata('is_logged_in')): ?>
 <div class="row">
   <div class="col-md-12">
-    <div class="card  mb-3 ">
+    <div class="card mb-3 ">
       <div class="card-header"><i class="fas fa-table"></i> Edit Event</div>
       <div class="card-body">
       <?php 
@@ -53,7 +53,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-primary',
+                      'class' => 'btn btn-outline-danger',
                       'name' => 'update_event',
                       'value' => 'Edit Event'
                     );

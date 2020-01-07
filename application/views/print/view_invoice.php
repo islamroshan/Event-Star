@@ -12,7 +12,7 @@
            <div class="input-group mb-3 input-group">
              <input type="text" name="keyword" class="form-control" placeholder="Search here" aria-label="Search here" aria-describedby="button-addon2">
              <div class="input-group-append">
-               <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+               <button class="btn btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
              </div>
            </div>
         </form>
@@ -50,12 +50,10 @@
              echo '<td>'. html_escape($i) .'</td>';
              echo '<td>'. html_escape($guests->guest_name).'</td>';
              echo '<td>'. html_escape($guests->event_name).' / '.html_escape($guests->ticket_name).'</td>';
-             echo '<td>$'. html_escape($guests->ticket_rate).' / $'. html_escape($guests->paid_amount).' </td>';
-             echo '<td>$'. html_escape($guests->remaining_due).'</td>';
+             echo '<td>'.html_escape($currency).' '. html_escape($guests->ticket_rate).' / '.html_escape($currency).' '. html_escape($guests->paid_amount).' </td>';
+             echo '<td>'.html_escape($currency).' '. html_escape($guests->remaining_due).'</td>';
              echo '<td>
-                    <div class="btn-group btn-group"> 
-                       <a href="'.base_url().'print/print_controller/print/'. $guests->guest_id .'" class="btn btn-success btn-sm">Print Invoice</a>
-                     </div>
+                     <a href="'.base_url().'print/print_controller/print/'. $guests->guest_id .'" class="btn btn-outline-danger">Print Invoice</a>
                    </td>';
              echo '</tr>';
            }

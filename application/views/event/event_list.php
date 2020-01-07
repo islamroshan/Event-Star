@@ -1,5 +1,27 @@
 <?php if($this->session->userdata('is_logged_in')): ?>
+<div class="row">
+  <div class="col-md-12">
+      <!-- if updated successfully  -->
+      <?php if($this->session->flashdata('event_updated')): ?>
+      <div class="alert alert-success alert-dismissible fade show " role="alert">
+          <?php echo $this->session->flashdata('event_updated'); ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>    
+    <?php endif;?>
 
+     <!-- if deleted successfully  -->
+     <?php if($this->session->flashdata('event_deleted')): ?>
+      <div class="alert alert-danger alert-dismissible fade show " role="alert">
+          <?php echo $this->session->flashdata('event_deleted'); ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>    
+    <?php endif;?>
+  </div>
+</div>
 <!-- DataTables -->
 <div class="card mb-3">
  <div class="card-header">
@@ -12,7 +34,7 @@
            <div class="input-group mb-3 input-group">
              <input type="text" name="keyword" class="form-control" placeholder="Search here" aria-label="Search here" aria-describedby="button-addon2">
              <div class="input-group-append">
-               <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+               <button class="btn btn-outline-primary" type="submit" id="button-addon2">Search</button>
              </div>
            </div>
         </form>
@@ -51,8 +73,8 @@
              echo '<td>'. html_escape($events->event_date).'</td>';
              echo '<td>
                     <div class="btn-group btn-group"> 
-                       <a href="'.base_url().'event/edit_event_controller/edit_event/'. $events->event_id  .'" class="btn btn-warning btn-sm">Edit Event</a>
-                       <a href="'.base_url().'add_plan_controller/delete_plan/'.$events->event_id.'" class="btn btn-danger btn-sm" onClick="return doconfirm()"> Delete Event</a>
+                       <a href="'.base_url().'event/edit_event_controller/edit_event/'. $events->event_id  .'" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                       <a href="'.base_url().'event/edit_event_controller/delete_event/'.$events->event_id.'" class="btn btn-danger btn-sm deleteitem"><i class="fas fa-trash-alt"></i></a>
                      </div>
                    </td>';
              echo '</tr>';

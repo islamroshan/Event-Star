@@ -17,6 +17,7 @@ class Settings_controller extends CI_Controller {
 		$this->setting_model->update_company($ems_details);
 		if($this->setting_model->update_company($ems_details))
 		{
+			$this->session->set_flashdata('settings_updated','Your Settings Has Been Updated Succesfully');
 			redirect('settings/settings_controller');
 		}
 	}
@@ -45,7 +46,8 @@ class Settings_controller extends CI_Controller {
     		$image_path = $data['raw_name'].$data['file_ext'];
     		if($this->setting_model->update_logo($image_path))
     		{
-    		     redirect('settings/settings_controller');
+				$this->session->set_flashdata('logo_updated','Your Logo Has Been Uploaded Succesfully');
+				redirect('settings/settings_controller');
     		}
 		}	 
 	}

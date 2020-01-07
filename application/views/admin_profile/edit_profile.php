@@ -2,9 +2,14 @@
 <div class="card">
   <div class="card-header">Edit Profile</div>
   <div class="card-body">
-    <div class="bg-danger text-white "> 
-      <?php echo validation_errors(); ?>
-    </div>
+    <?php if(validation_errors()): ?>
+      <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
+          <?php echo validation_errors(); ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>    
+    <?php endif;?>
     <?php 
       foreach ($user_detail as $user) {
           $user_data = array(
@@ -103,7 +108,7 @@
       <div class="form-group">
         <?php 
           $data = array(
-            'class' => 'btn btn-primary ',
+            'class' => 'btn btn-outline-danger',
             'name' => 'update_profile',
             'value' => 'Update'
           );

@@ -17,11 +17,13 @@ class Add_ticket_controller extends CI_Controller {
         $query = $this->ticket_model->add_ticket($ticket);
         if($query)
         {
+            $this->session->set_flashdata('ticket_added','Ticket Has Been Added');
             redirect('ticket/add_ticket_controller');
         }
         else
         {
-            redirect('dashboard_controller');
+            $this->session->set_flashdata('ticket_not_added','Ticket Has Not Been Added');
+            redirect('ticket/add_ticket_controller');
         }
     }
 }

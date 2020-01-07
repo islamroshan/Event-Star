@@ -1,12 +1,39 @@
 <?php if($this->session->userdata('is_logged_in')): ?>
 <div class="row">
   <div class="col-md-12">
+   <?php if(isset($error)): ?>
+      <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
+        <?php echo $error;?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>    
+    <?php endif;?>
+
+    <!-- if logo updated successfully  -->
+    <?php if($this->session->flashdata('logo_updated')): ?>
+    <div class="alert alert-success alert-dismissible fade show " role="alert">
+        <?php echo $this->session->flashdata('logo_updated'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>    
+    <?php endif;?>
+
+     <!-- if settings updated successfully  -->
+     <?php if($this->session->flashdata('settings_updated')): ?>
+    <div class="alert alert-success alert-dismissible fade show " role="alert">
+        <?php echo $this->session->flashdata('settings_updated'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>    
+    <?php endif;?>
+
     <div class="card mb-3 ">
       <div class="card-header"><i class="fas fa-table"></i> Change Logo</div>
       <div class="card-body">
-         <div class="bg-danger text-white">
-            <?php if(isset($error)){ echo $error; }?>
-         </div>
+      
          <?php echo form_open_multipart('settings/settings_controller/update_logo'); ?>
          <div class="form-group row">
            <div class="col-md-2 col-form-label"> 
@@ -26,7 +53,7 @@
            <div class="col-sm-10"> 
               <?php 
                  $data = array(
-                   'class' => 'btn btn-primary',
+                   'class' => 'btn btn-outline-danger',
                    'name' => 'update_logo',
                    'value' => 'Save'
                  );
@@ -136,7 +163,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-primary',
+                      'class' => 'btn btn-outline-danger',
                       'name' => 'update_brand',
                       'value' => 'Save Settings'
                     );

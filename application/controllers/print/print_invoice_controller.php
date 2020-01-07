@@ -11,7 +11,8 @@ class Print_invoice_controller extends CI_Controller {
 		  $this->page();
 		  $limit_per_page = 10;
 		  $start = $this->uri->segment(4);
-
+		
+		  $data['currency'] = $this->setting_model->get_currency();
           $data['guests_list'] = $this->guest_model->get_guests($limit_per_page,$start);
 		  $datakey = array(
 		  'key'  => 'show',
@@ -23,6 +24,7 @@ class Print_invoice_controller extends CI_Controller {
         else 
 		{
 		  $keys = html_escape($this->input->post('keyword'));
+		  $data['currency'] = $this->setting_model->get_currency();
           $data['guests_list'] = $this->guest_model->search_tag($keys);
 		}
 
@@ -48,19 +50,19 @@ class Print_invoice_controller extends CI_Controller {
 	    //bootstrap styling
 	    $config['full_tag_open'] = '<ul class="pagination justify-content-end m-0 pt-3 ">';
 	    $config['full_tag_close'] = '</ul>';
-	    $config['num_tag_open'] = '<li class="page-item">';
+	    $config['num_tag_open'] = '<li class="page-item ">';
 	    $config['num_tag_close'] = '</li>';
-	    $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+	    $config['cur_tag_open'] = '<li class="page-item active "><a class="page-link" href="#">';
 	    $config['cur_tag_close'] = '</a></li>';
-	    $config['next_tag_open'] = '<li class="page-item">';
+	    $config['next_tag_open'] = '<li class="page-item ">';
 	    $config['next_tag_close'] = '</li>';
 	    $config['first_link'] = 'First';
 	    $config['last_link'] = 'Last';
 	    $config['next_link'] = 'Next';
 	    $config['prev_link'] = 'Previous';
-	    $config['prev_tag_open'] = '<li class="page-item">';
+	    $config['prev_tag_open'] = '<li class="page-item ">';
 	    $config['prev_tag_close'] = '</li>';
-	    $config['first_tag_open'] = '<li class="page-item">';
+	    $config['first_tag_open'] = '<li class="page-item ">';
 	    $config['first_tag_close'] = '</li>';
 	    $config['last_tag_open'] = '<li class="page-item ">';
 	    $config['last_tag_close'] = '</a></li>';

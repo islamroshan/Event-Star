@@ -17,11 +17,13 @@ class Add_event_controller extends CI_Controller {
         $query = $this->event_model->add_event($events);
         if($query)
         {
-            redirect('Add_event_controller');
+            $this->session->set_flashdata('event_created','Event Had Been Added');
+            redirect('event/add_event_controller');
         }
         else
         {
-            redirect('dashboard_controller');
+            $this->session->set_flashdata('event_not_created','Event Had Not Been Added');
+            redirect('event/add_event_controller');
         }
     }
 }
