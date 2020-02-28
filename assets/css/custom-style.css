@@ -2,10 +2,11 @@
 	max-width: 2480px;
 }
 
-.letter-space {
-	letter-spacing:6px;
-}
-
 .card-width {
 	max-width: 100px;
 }
+
+.form-control:focus {
+	border-color: #007bffc7;
+	box-shadow: none;
+  }

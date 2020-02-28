@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+// To set the current time 
+date_default_timezone_set('Asia/Karachi');
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -23,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/event/';
+$config['base_url'] = 'http://localhost/ems/';
 
 /*
 |--------------------------------------------------------------------------
