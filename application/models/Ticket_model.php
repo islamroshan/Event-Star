@@ -27,7 +27,7 @@ class Ticket_model extends CI_Model {
         $this->db->limit($limit,$start);
         $this->db->select('tickets.*,events.event_name');
         $this->db->from('tickets');
-        $this->db->join('events','tickets.event_name = events.event_id');
+        $this->db->join('events','tickets.event_name = events.event_id','left');
         $query = $this->db->get();
         if($query->num_rows() > 0)
         {
@@ -67,6 +67,7 @@ class Ticket_model extends CI_Model {
             return NULL;
         }
     }
+    
     //To get total rows
     public function get_total_ticket_rows()
     {

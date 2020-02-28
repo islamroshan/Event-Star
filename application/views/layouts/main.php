@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -29,7 +29,7 @@
 
 <body id="page-top">
 
-  <nav class="navbar navbar-expand navbar-dark upper-nav static-top">
+  <nav class="navbar navbar-expand navbar-dark bg-primary static-top">
   <?php 
     $ems_settings = $this->setting_model->get_settings();
       foreach ($ems_settings as $name) 
@@ -136,7 +136,6 @@
 
     </div>
     <!-- /.content-wrapper -->
-
   </div>
   <!-- /#wrapper -->
 

@@ -27,7 +27,7 @@ date_default_timezone_set('Asia/Karachi');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/event/';
+$config['base_url'] = 'http://localhost/ems/';
 
 /*
 |--------------------------------------------------------------------------

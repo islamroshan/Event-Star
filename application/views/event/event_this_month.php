@@ -50,8 +50,8 @@
              echo '<td>'. html_escape($events->event_date).'</td>';
              echo '<td>
                     <div class="btn-group btn-group"> 
-                       <a href="'.base_url().'event/edit_event_controller/edit_event/'. $events->event_id  .'" class="btn btn-warning btn-sm">Edit Event</a>
-                       <a href="'.base_url().'add_plan_controller/delete_plan/'.$events->event_id.'" class="btn btn-danger btn-sm" onClick="return doconfirm()"> Delete Event</a>
+                       <a href="'.base_url().'event/edit_event_controller/edit_event/'. $events->event_id  .'" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                       <a href="'.base_url().'add_plan_controller/delete_plan/'.$events->event_id.'" class="btn btn-danger btn-sm deleteitem"> <i class="fas fa-trash-alt"></i></a>
                      </div>
                    </td>';
              echo '</tr>';

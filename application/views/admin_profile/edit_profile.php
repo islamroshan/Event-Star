@@ -108,7 +108,7 @@
       <div class="form-group">
         <?php 
           $data = array(
-            'class' => 'btn btn-outline-danger',
+            'class' => 'btn btn-outline-primary',
             'name' => 'update_profile',
             'value' => 'Update'
           );

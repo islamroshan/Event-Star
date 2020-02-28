@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Edit_ticket_controller extends CI_Controller {
 
     //Add Event

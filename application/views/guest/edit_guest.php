@@ -7,19 +7,19 @@
       <?php 
         foreach ($guest_detail as $guests) 
         {
-            $guest = array(
-                'name' => $guests->guest_name,
-                'phone' => $guests->guest_number,  
-                'address' => $guests->guest_address,
-                'email' => $guests->guest_email,
-                'purchase_from' => $guests->purchase_from,
-                'date' => $guests->purchase_date,  
-                'event_name' => $guests->event_name,
-                'ticket_name' => $guests->ticket_name, 
-                'ticket_id' => $guests->ticket_id,  
-                'rate' => $guests->ticket_rate,
-                'p_amount' => $guests->paid_amount,                 
-            );
+          $guest = array(
+              'name' => $guests->guest_name,
+              'phone' => $guests->guest_number,  
+              'address' => $guests->guest_address,
+              'email' => $guests->guest_email,
+              'purchase_from' => $guests->purchase_from,
+              'date' => $guests->purchase_date,  
+              'event_name' => $guests->event_name,
+              'ticket_name' => $guests->ticket_name, 
+              'ticket_id' => $guests->ticket_id,  
+              'rate' => $guests->ticket_rate,
+              'p_amount' => $guests->paid_amount,                 
+          );
         }
       ?>
         <!-- Form starts -->
@@ -228,7 +228,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-outline-danger',
+                      'class' => 'btn btn-outline-primary',
                       'name' => 'edit_guest',
                       'value' => 'Update'
                     );

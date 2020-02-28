@@ -65,7 +65,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-outline-danger',
+                      'class' => 'btn btn-outline-primary',
                       'name' => 'add_event',
                       'value' => 'Add Event'
                     );

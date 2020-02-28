@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Guest_list_controller extends CI_Controller {
-
     //Initialize page
 	public function index()
 	{
@@ -31,8 +30,6 @@ class Guest_list_controller extends CI_Controller {
         $data['main_view'] = 'guest/guest_list';
         $this->load->view('layouts/main',$data);   
     }
-
-    
 
     //Load Pagination
 	public function page()

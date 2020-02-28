@@ -1,7 +1,7 @@
 <?php if($this->session->userdata('is_logged_in')): ?>
 <div class="row">
   <div class="col-md-12">
-  <!-- if updated successfully  -->
+  <!-- if added successfully  -->
   <?php if($this->session->flashdata('guest_added')): ?>
     <div class="alert alert-success alert-dismissible fade show " role="alert">
         <?php echo $this->session->flashdata('guest_added'); ?>
@@ -11,7 +11,7 @@
     </div>    
     <?php endif;?>
 
-    <!-- if deleted successfully  -->
+    <!-- if not added successfully  -->
     <?php if($this->session->flashdata('guest_not_added')): ?>
     <div class="alert alert-danger alert-dismissible fade show " role="alert">
         <?php echo $this->session->flashdata('guest_not_added'); ?>
@@ -184,7 +184,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-outline-danger',
+                      'class' => 'btn btn-outline-primary',
                       'name' => 'add_guest',
                       'value' => 'Add Guest'
                     );

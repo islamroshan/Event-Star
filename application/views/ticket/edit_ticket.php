@@ -7,12 +7,12 @@
       <?php 
         foreach ($ticket_detail as $tickets) 
         {
-            $ticket = array(
-                'name' => $tickets->ticket_name,
-                'price' => $tickets->ticket_price,  
-                'limit' => $tickets->ticket_limit,
-                'event_name' => $tickets->event_name,               
-            );
+          $ticket = array(
+              'name' => $tickets->ticket_name,
+              'price' => $tickets->ticket_price,  
+              'limit' => $tickets->ticket_limit,
+              'event_name' => $tickets->event_name,               
+          );
         }
       ?>
         <!-- Form starts -->
@@ -92,7 +92,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-outline-danger',
+                      'class' => 'btn btn-outline-primary',
                       'name' => 'edit_ticket',
                       'value' => 'Update'
                     );

@@ -55,8 +55,8 @@ class Guest_model extends CI_Model {
         $this->db->limit($limit,$start);
         $this->db->select('*,events.event_name','tickets.ticket_name');
         $this->db->from('guests');
-        $this->db->join('events','guests.event_name = events.event_id');
-        $this->db->join('tickets','guests.ticket_name = tickets.ticket_id');
+        $this->db->join('events','guests.event_name = events.event_id','left');
+        $this->db->join('tickets','guests.ticket_name = tickets.ticket_id','left');
         $query = $this->db->get();
         if($query->num_rows() > 0)
         {
@@ -68,15 +68,13 @@ class Guest_model extends CI_Model {
         }
     }
     
-
     //Get guest by id
-     //Get guest from database
      public function get_guest_by_id($guest_id)
      {
          $this->db->select('*,events.event_name','tickets.ticket_name','tickets.ticket_id');
          $this->db->from('guests');
-         $this->db->join('events','guests.event_name = events.event_id');
-         $this->db->join('tickets','guests.ticket_name = tickets.ticket_id');
+         $this->db->join('events','guests.event_name = events.event_id','left');
+         $this->db->join('tickets','guests.ticket_name = tickets.ticket_id','left');
          $this->db->where('guest_id',$guest_id);
          $query = $this->db->get();
          if($query->num_rows() > 0)
@@ -88,6 +86,7 @@ class Guest_model extends CI_Model {
              return NULL;
          }
      }
+     
     //To get total rows
     public function get_total_guest_rows()
     {
@@ -102,8 +101,8 @@ class Guest_model extends CI_Model {
     {
         $this->db->select('*,events.event_name','tickets.ticket_name');
         $this->db->from('guests');
-        $this->db->join('events','guests.event_name = events.event_id');
-        $this->db->join('tickets','guests.ticket_name = tickets.ticket_id');
+        $this->db->join('events','guests.event_name = events.event_id','left');
+        $this->db->join('tickets','guests.ticket_name = tickets.ticket_id','left');
         $this->db->like('guest_name',$search_keyword);
         $query = $this->db->get();
         if($query->num_rows() > 0)

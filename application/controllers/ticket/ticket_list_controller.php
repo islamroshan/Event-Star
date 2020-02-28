@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ticket_list_controller extends CI_Controller {
-
     //Initialize page
 	public function index()
 	{

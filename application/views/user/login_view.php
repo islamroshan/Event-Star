@@ -16,10 +16,11 @@
 
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url(); ?>assets/css/sb-admin.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/css/custom-style.css" rel="stylesheet">
 
 </head>
 
-<body class="bg-info">
+<body class="login-color">
 
   <div class="container">
     <div class="card card-login mx-auto mt-5">

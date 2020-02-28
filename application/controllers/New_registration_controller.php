@@ -22,7 +22,6 @@ class New_registration_controller extends CI_Controller {
 
 		$this->load->library('upload', $config);
 
-
 		if ( ! $this->upload->do_upload('userimage'))
 		{
 			$data = array('error' => $this->upload->display_errors());

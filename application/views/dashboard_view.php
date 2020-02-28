@@ -1,12 +1,13 @@
 <?php if($this->session->userdata('is_logged_in')): ?>
-<?php   
+<?php 
+    // Calsulate income per month
     $total = 0;
-    if (!empty($income_per_month)) { 
-    
-    foreach($income_per_month as $value) 
-    {
-        $total =  $value->paid_amount +  $total ;
-    }
+    if (!empty($income_per_month)) 
+    { 
+        foreach($income_per_month as $value) 
+        {
+            $total =  $value->paid_amount +  $total ;
+        }
     }
     
   ?>
@@ -79,14 +80,15 @@
     </div>
     </div>
 </div>
-<!-- Area Chart Example-->
+<!-- Area Chart-->
 <div class="card mb-3">
-<div class="card-header">
-    <i class="fas fa-chart-area"></i>
-    Over All Statistics</div>
-<div class="card-body">
-    <canvas id="myChart" width="100%" height="30"></canvas>
-</div>
+    <div class="card-header">
+        <i class="fas fa-chart-area"></i>
+        Over All Statistics
+    </div>
+    <div class="card-body">
+        <canvas id="myChart" width="100%" height="30"></canvas>
+    </div>
 </div>
 <!-- Chart View -->
 <?php $this->load->view('charts/charts_view'); ?>
