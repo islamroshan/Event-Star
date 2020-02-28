@@ -12,6 +12,14 @@ class Add_guest_controller extends CI_Controller {
         $this->load->view('layouts/main',$data);
     }
 
+    public function geting_ticket()
+    {
+        if($this->input->post('event_id'))
+        {
+            echo $this->ticket_model->geting_tickets($this->input->post('event_id'));
+        }
+    }
+    
     //Add Event
     public function add_guest()
     {

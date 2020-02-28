@@ -29,7 +29,7 @@
 
 <body id="page-top">
 
-  <nav class="navbar navbar-expand navbar-dark bg-primary static-top">
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
   <?php 
     $ems_settings = $this->setting_model->get_settings();
       foreach ($ems_settings as $name) 
@@ -184,6 +184,10 @@
     
     <!-- Ajax select box -->
     <script src="<?php echo base_url(); ?>assets/select-box/js/bootstrap-select.js"></script>
-
+    <script src="<?php echo base_url(); ?>assets/js/custom_ajax.js"></script>
+   
+    <script>
+      var baseurl = "<?php echo base_url(); ?>";
+    </script>
   </body>
 </html>

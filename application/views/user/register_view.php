@@ -20,7 +20,7 @@
 
 </head>
 
-<body class="login-color">
+<body class="bg-dark">
 
   <div class="container">
     <div class="card card-register mx-auto mt-5">

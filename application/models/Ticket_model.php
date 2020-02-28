@@ -39,6 +39,26 @@ class Ticket_model extends CI_Model {
         }
     }
 
+    public function geting_tickets($event_id)
+    {
+        $this->db->where('event_name',$event_id);
+        $this->db->order_by('ticket_name','ASC');
+        $query = $this->db->get('tickets');
+        if($query->num_rows() > 0)
+        {
+            $output = '<option value="">Select ticket</option>';
+            foreach($query->result() as $row)
+            {
+                $output .= '<option  value="'.$row->ticket_id.'">'.$row->ticket_name.'</option>';
+            }
+            return $output;
+        }
+        else
+        {
+           return $output = '<option value="">No ticket for selected event</option>';
+        }
+    }
+
     //Get all ticket from database
     public function get_all_tickets()
     {

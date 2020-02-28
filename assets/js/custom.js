@@ -9,11 +9,12 @@ $(document).ready(function(){
       return false;
     }
   });
-});
+ 
+  // Print Button To Print Invoice
+  $('#btnPrint').click(function(){
+       window.print();
+  });
 
-// Print Button To Print Invoice
-$('#btnPrint').click(function(){
-     window.print();
 });
 
 })(jQuery); // End of use strict
