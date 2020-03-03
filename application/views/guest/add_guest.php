@@ -135,10 +135,10 @@
                 <label for="eventname">Event Name</label>
               </div>
                <div class="col-md-4 col-md-offset-4">  
-                 <select class="selectpicker form-control" id="event_picker"  name="eventname" data-live-search="true">  
+                 <select class="selectpicker form-control" id="event_picker" title="Select event"  name="eventname" data-live-search="true"> 
                         <?php   
                           foreach ($events as $event) {
-                            echo '<option value="'. html_escape($event->event_id) .'" >'. html_escape($event->event_name) .'</option>';
+                            echo '<option data-subtext="(Event on: '.$event->event_date.')" value="'. html_escape($event->event_id) .'" >'. html_escape($event->event_name) .'</option>';
                           }
                          ?>
                     </select>
@@ -155,6 +155,25 @@
 									</select>
 							</div>
 						</div>
+            
+            <div class="form-group row" id="tamount_hide">
+              <div class="col-md-2 col-form-label">
+                 <?php  echo form_label('Total Amount','tamount'); ?>
+              </div>
+              <div class="col-md-4 col-md-offset-4">
+                <?php 
+                    $data = array(
+                      'class' => 'form-control',
+                      'name' => 'tamount',
+                      'type' => 'text',
+                      'id' => 'tamount',
+                      'value' => $currency.' 0',
+                      'disabled' => TRUE
+                    );
+                    echo form_input($data);    
+                 ?>
+              </div>
+            </div>
 
             <div class="form-group row">
               <div class="col-md-2 col-form-label">
@@ -167,7 +186,7 @@
                       'name' => 'pamount',
                       'type' => 'number',
                       'id' => 'pamount',
-                      'placeholder' => 'Paid Amount' 
+                      'placeholder' => $currency.' 0'
                     );
                     echo form_input($data);    
                  ?>

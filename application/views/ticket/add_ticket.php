@@ -52,6 +52,7 @@
                     $data = array(
                       'class' => 'form-control',
                       'name' => 'price',
+                      'type' => 'number',
                       'id' => 'price',
                       'placeholder' => 'Price' 
                     );
@@ -86,7 +87,8 @@
                     <select class="selectpicker form-control" name="selectevent" data-live-search="true">  
                         <option value="">Select</option>
                         <?php   
-                          foreach ($events as $event) {
+                          foreach ($events as $event) 
+                          {
                             echo '<option value="'. html_escape($event->event_id) .'" >'. html_escape($event->event_name) .'</option>';
                           }
                          ?>

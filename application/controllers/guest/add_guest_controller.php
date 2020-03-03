@@ -19,7 +19,14 @@ class Add_guest_controller extends CI_Controller {
             echo $this->ticket_model->geting_tickets($this->input->post('event_id'));
         }
     }
-    
+
+    public function get_ticket_price()
+    {
+        if($this->input->post('ticket_id'))
+        {
+            echo $this->setting_model->get_currency() .' '.$this->ticket_model->get_ticket_price($this->input->post('ticket_id'));
+        }
+    }
     //Add Event
     public function add_guest()
     {

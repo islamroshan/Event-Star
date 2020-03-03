@@ -4,17 +4,20 @@ class Guest_model extends CI_Model {
     //Insert guest to database
     public function add_guest($guests)
     {
-        $paid_amount = $guests['pamount'];
+        $paid_amount =  $guests['pamount'];
         $ticket_name =  $guests['ticketname'];
+
+        //GETING TICKET DETAIL
         $get_ticket_detail = $this->db->where('ticket_id', $ticket_name);
         $get_ticket_detail = $this->db->get('tickets');
 
-        //Get limit and rate
- 		$limit = $get_ticket_detail->row(3)->ticket_limit;
         $ticket_rate =  $get_ticket_detail->row(2)->ticket_price;
+        $tickets_available = $get_ticket_detail->row(4)->tickets_available;
+        $tickets_issued = $get_ticket_detail->row(5)->tickets_issued;
         
         $payable_amount = $ticket_rate - $paid_amount;
-        $update_ticket = $limit - 1 ;
+        $ticket_stock = $tickets_available - 1 ;
+        $tickets_issued += 1;
 
         //Insert into guest table
         $data = array(
@@ -32,9 +35,10 @@ class Guest_model extends CI_Model {
         ); 
          $query = $this->db->insert('guests',$data);
 
-         //Update Ticket Limit
+         //UPDATE TICKET STOCK
          $data1 = array(
-             'ticket_limit' => html_escape($update_ticket),
+             'tickets_available' => html_escape($ticket_stock),
+             'tickets_issued' => html_escape($tickets_issued),
          );
          $this->db->where('ticket_id', $ticket_name);
          $this->db->update('tickets',$data1);
@@ -150,12 +154,12 @@ class Guest_model extends CI_Model {
         $get_ticket_detail = $this->db->where('ticket_id', $ticket_id);
         $get_ticket_detail = $this->db->get('tickets');
        
-        //Find payable amount
+        //FIND TICKET PRICE
         $ticket_rate =  $get_ticket_detail->row(2)->ticket_price;
         $payable_amount = $ticket_rate - $paid_amount;
        
 
-        //Insert into guest table
+        //UPDATE GUEST IN DATABASE 
         $data = array(
             'guest_name' => html_escape($guests['guestname']),
             'guest_number' => html_escape($guests['phone']),

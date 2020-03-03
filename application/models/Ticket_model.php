@@ -1,13 +1,20 @@
 <?php
 class Ticket_model extends CI_Model {
 
-    //Insert event to database
+    //INSERT TICKET INTO DATABASE
     public function add_ticket($tickets)
     {
+
+        $total_tickets = $tickets['limit'];
+        $available_tickets = $total_tickets;
+        $issued_tickets = $total_tickets - $available_tickets;
+
         $data = array(
             'ticket_name' => html_escape($tickets['ticketname']),
             'ticket_price' => html_escape($tickets['price']),
-            'ticket_limit' => html_escape($tickets['limit']),
+            'ticket_limit' => html_escape($total_tickets),
+            'tickets_available' => html_escape($available_tickets),
+            'tickets_issued' => html_escape($issued_tickets),
             'event_name' => html_escape($tickets['selectevent']),
         ); 
          $query = $this->db->insert('tickets',$data);
@@ -28,6 +35,7 @@ class Ticket_model extends CI_Model {
         $this->db->select('tickets.*,events.event_name');
         $this->db->from('tickets');
         $this->db->join('events','tickets.event_name = events.event_id','left');
+        $this->db->where('tickets.ticket_limit >=', 1);
         $query = $this->db->get();
         if($query->num_rows() > 0)
         {
@@ -41,7 +49,8 @@ class Ticket_model extends CI_Model {
 
     public function geting_tickets($event_id)
     {
-        $this->db->where('event_name',$event_id);
+        $where_condition = array('event_name' => $event_id, 'tickets_available >' =>  0);
+        $this->db->where($where_condition);
         $this->db->order_by('ticket_name','ASC');
         $query = $this->db->get('tickets');
         if($query->num_rows() > 0)
@@ -49,7 +58,7 @@ class Ticket_model extends CI_Model {
             $output = '<option value="">Select ticket</option>';
             foreach($query->result() as $row)
             {
-                $output .= '<option  value="'.$row->ticket_id.'">'.$row->ticket_name.'</option>';
+                $output .= '<option  value="'.$row->ticket_id.'">'.$row->ticket_name.' (In stock: '.$row->tickets_available.' tickets)</option>';
             }
             return $output;
         }
@@ -57,6 +66,15 @@ class Ticket_model extends CI_Model {
         {
            return $output = '<option value="">No ticket for selected event</option>';
         }
+    }
+
+    public function get_ticket_price($ticket_id)
+    {
+        $this->db->where('ticket_id',$ticket_id);
+        $this->db->order_by('ticket_name','ASC');
+        $query = $this->db->get('tickets');
+        $result = $query->row(2)->ticket_price;
+        return $result;
     }
 
     //Get all ticket from database
@@ -101,6 +119,7 @@ class Ticket_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('tickets');
         $this->db->like('ticket_name',$search_keyword);
+        $this->db->where('tickets.ticket_limit >=', 1);
         $query = $this->db->get();
         if($query->num_rows() > 0)
         {
@@ -118,7 +137,6 @@ class Ticket_model extends CI_Model {
         $data = array(
             'ticket_name' => $ticket_details['ticketname'],
             'ticket_price' => $ticket_details['price'],
-            'ticket_limit' => $ticket_details['limit'],
             'event_name' => $ticket_details['selectevent'],
         );
         $this->db->where('ticket_id',$ticket_id);

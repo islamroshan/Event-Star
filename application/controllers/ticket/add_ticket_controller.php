@@ -4,7 +4,7 @@ class Add_ticket_controller extends CI_Controller {
 
     //Initailize Page
 	public function index()
-	{
+	{ 
         $data['events'] = $this->event_model->get_all_events();
         $data['main_view'] = 'ticket/add_ticket';
         $this->load->view('layouts/main',$data);

@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Edit_ticket_controller extends CI_Controller {
-
-    //Add Event
-    public function edit_ticket($ticket_id)
+class Edit_ticket_stock_out extends CI_Controller {
+    
+    //GET TICKET INFO
+    public function get_ticket_info($ticket_id)
     {
         $data['event_list'] = $this->event_model->get_all_events();
-        $data['ticket_detail'] = $this->ticket_model->get_tickets_by_id($ticket_id);
-        $data['main_view'] = 'ticket/edit_ticket';
+        $data['ticket_info'] = $this->ticket_model->get_tickets_by_id($ticket_id);
+        $data['main_view'] = 'overview/edit_ticket_stock';
         $this->load->view('layouts/main',$data);
     }
 
@@ -18,8 +18,8 @@ class Edit_ticket_controller extends CI_Controller {
         $query = $this->ticket_model->update_ticket($ticket_detail,$ticket_id);
         if($query)
         {
-            $this->session->set_flashdata('ticket_updated','Ticket Has Been Updated');
-            redirect('ticket/ticket_list_controller');
+            $this->session->set_flashdata('ticket_stock_updated','Ticket Has Been Updated');
+            redirect('overview/ticket_stock_out');
         }
         else
         {
@@ -32,7 +32,7 @@ class Edit_ticket_controller extends CI_Controller {
     {
         if($this->ticket_model->delete_ticket($ticket_id))
         {
-            redirect('ticket/ticket_list_controller');
+            redirect('overview/ticket_stock_out');
         }
         else
         {

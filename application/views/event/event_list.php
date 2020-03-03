@@ -12,14 +12,14 @@
     <?php endif;?>
 
      <!-- if deleted successfully  -->
-     <?php if($this->session->flashdata('event_deleted')): ?>
+     <!-- <?php if($this->session->flashdata('event_deleted')): ?>
       <div class="alert alert-danger alert-dismissible fade show " role="alert">
           <?php echo $this->session->flashdata('event_deleted'); ?>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
       </div>    
-    <?php endif;?>
+    <?php endif;?> -->
   </div>
 </div>
 <!-- DataTables -->
@@ -66,7 +66,7 @@
            foreach ($events_list as $events) 
            {
              $i = ++$i;
-             echo '<tr>';
+             echo '<tr id="hide_animate">';
              echo '<td>'. html_escape($i) .'</td>';
              echo '<td>'. html_escape($events->event_id).'</td>';
              echo '<td>'. html_escape($events->event_name).'</td>';

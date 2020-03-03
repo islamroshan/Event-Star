@@ -15,12 +15,14 @@
 
     <!-- Page level plugin CSS-->
     <link href="<?php echo base_url(); ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    
+    <!-- AJAX select box styles for this template-->
+    <link href="<?php echo base_url(); ?>assets/select-box/css/bootstrap-select.css" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url(); ?>assets/css/sb-admin.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/custom-style.css" rel="stylesheet">
 
-    <link href="<?php echo base_url(); ?>assets/select-box/css/bootstrap-select.css" rel="stylesheet">
 
     <!-- Charts  -->
     <script src="<?php echo base_url(); ?>assets/vendor/chart.js/Chart.min.js"></script>
@@ -85,6 +87,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="<?php echo base_url('ticket/add_ticket_controller'); ?>">Add Ticket</a>
+          <a class="dropdown-item" href="<?php echo base_url('ticket/add_ticket_controller'); ?>">Add Stock</a>
           <a class="dropdown-item" href="<?php echo base_url('ticket/ticket_list_controller'); ?>">Ticket List</a>
         </div>
       </li>
@@ -105,6 +108,16 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="<?php echo base_url('print/print_invoice_controller'); ?>">Print Invoice</a>
+        </div>
+      </li>
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-receipt"></i>
+          <span>Overview</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item" href="<?php echo base_url('overview/expired_events_controller'); ?>">Expired events</a>
+          <a class="dropdown-item" href="<?php echo base_url('overview/ticket_stock_out'); ?>">Tickets out of stock</a>
         </div>
       </li>
       <li class="nav-item">

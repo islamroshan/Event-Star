@@ -52,6 +52,7 @@ class Event_model extends CI_Model {
     //Get all events from database
     public function get_all_events()
     {
+        $this->db->where('MONTH(event_date) >=', date('m'));
         $query = $this->db->get('events');
         if($query->num_rows() > 0)
         {
