@@ -17,9 +17,10 @@
       ?>
         <!-- Form starts -->
          <?php echo form_open('ticket/edit_ticket_controller/update_ticket/'.html_escape($this->uri->segment(4))); ?>
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Ticket Name','ticketname'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Ticket Name','ticketname',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
@@ -35,9 +36,10 @@
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Price per Unit','price'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Price per Unit','price',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
@@ -94,7 +96,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-outline-primary',
+                      'class' => 'btn btn-outline-primary edit_verification',
                       'name' => 'edit_ticket',
                       'value' => 'Update'
                     );

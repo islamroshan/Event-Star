@@ -7,21 +7,45 @@ $(document).ready(function()
 {
 
   //HIDE EFFECT ON ITEM DELETION
-  function cuteHide(el) 
+  function cuteHide(div_id) 
   {
-   el.hide("slow");
+   div_id.hide("slow");
   }
     
   $(".deleteitem").click(function()
   {    
-    if (!confirm("Do you want to delete!"))
+    var pin_verify = prompt("Please enter your pin code to coutinue");
+    if (admin_pin == pin_verify && admin_pin != 0)
     {
-     return false;
+      var div_id = $(this).closest('#hide_animate');
+      cuteHide(div_id);
+    }
+    else if( pin_verify >= 1 && admin_pin != pin_verify)
+    {
+      alert('You entered an invalid pin. only admin can edit or delete');
+      return false;
     }
     else
     {
-      var el = $(this).closest('#hide_animate');
-      cuteHide(el);
+      return false;
+    }
+  });
+
+  $(".edit_verification").click(function()
+  {    
+    var pin_verify = prompt("Please enter your pin code to coutinue");
+    if (admin_pin == pin_verify && admin_pin != 0)
+    {
+     return true;
+    }
+    else if( pin_verify >= 1 && admin_pin != pin_verify)
+    {
+      alert('You entered an invalid pin. only admin can edit or delete');
+      return false;
+    }
+    else
+    {
+      return false;
     }
   });
  

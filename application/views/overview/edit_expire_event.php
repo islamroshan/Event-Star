@@ -15,9 +15,10 @@
       ?>
         <!-- Form starts -->
          <?php echo form_open('overview/edit_expire_event/update_expire_event/'.$this->uri->segment(4).' '); ?>
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Event Name','eventname'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Event Name','eventname',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
@@ -54,7 +55,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-outline-primary',
+                      'class' => 'btn btn-outline-primary edit_verification',
                       'name' => 'update_event',
                       'value' => 'Update'
                     );

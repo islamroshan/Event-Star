@@ -34,7 +34,7 @@
                       'class' => 'form-control',
                       'name' => 'useremail',
                       'id' => 'inputEmail',
-                      'value' => 'admin',
+                      'value' => '',
                       'placeholder' => 'Email address',
                       'autofocus' => 'autofocus'
                     );
@@ -49,12 +49,28 @@
                     $data = array(
                       'class' => 'form-control',
                       'name' => 'userpassword',
-                      'value' => '12345',
+                      'value' => '',
                       'id' => 'inputPassword',
                       'placeholder' => 'Password'
                     );
                     echo form_password($data);
                     echo form_label('Password','inputPassword');
+                 ?>
+              </div>
+           </div>
+           <p class="display-5 text-center"><em>OR</em></p>
+           <div class="form-group">
+              <div class="form-label-group">
+                <?php 
+                    $data = array(
+                      'class' => 'form-control',
+                      'name' => 'pin',
+                      'type' => 'number',
+                      'id' => 'pin',
+                      'placeholder' => 'Pin'
+                    );
+                    echo form_input($data);
+                    echo form_label('Enter Pin','pin');
                  ?>
               </div>
            </div>
@@ -73,9 +89,10 @@
           </div>
       </div>
       <ul class="list-group">
-  <li class="list-group-item h5"><strong>Email :  admin</strong></li>
-  <li class="list-group-item h5"><strong>Password : 12345</strong></li>
-</ul>
+        <li class="list-group-item h5"><strong>Email :  admin</strong></li>
+        <li class="list-group-item h5"><strong>Password : 12345</strong></li>
+        <li class="list-group-item h5"><strong>Use only pin : 1122</strong></li>
+      </ul>
     </div>
   </div>
 

@@ -53,7 +53,7 @@
            <div class="col-sm-10"> 
               <?php 
                  $data = array(
-                   'class' => 'btn btn-outline-primary',
+                   'class' => 'btn btn-outline-primary edit_verification',
                    'name' => 'update_logo',
                    'value' => 'Save'
                  );
@@ -163,7 +163,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-outline-primary',
+                      'class' => 'btn btn-outline-primary edit_verification',
                       'name' => 'update_brand',
                       'value' => 'Save Settings'
                     );

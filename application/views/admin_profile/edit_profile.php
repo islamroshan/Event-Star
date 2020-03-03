@@ -57,37 +57,41 @@
         </div>
      </div>
      <div class="form-group">
-        <div class="form-label-group">
-          <?php 
-           $data = array(
-            'class' => 'form-control',
-            'id' => 'inputEmail',
-            'value' =>  html_escape($user_data['email']),
-            'placeholder' => '',
-            'name' => 'useremail'
-           );
-           echo form_input($data);
-           echo form_label('Email address','inputEmail');
-           ?>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-label-group">
+            <?php 
+            $data = array(
+              'class' => 'form-control',
+              'id' => 'inputEmail',
+              'value' =>  html_escape($user_data['email']),
+              'placeholder' => '',
+              'name' => 'useremail'
+            );
+            echo form_input($data);
+            echo form_label('Email address','inputEmail');
+            ?>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-label-group">
+            <?php 
+                $data = array(
+                  'class' => 'form-control',
+                  'name' => 'password',
+                  'requried' => 'requried',
+                  'id' => 'inputPassword',
+                  'placeholder' => '' 
+                );
+                echo form_password($data);
+                echo form_label('Password','inputPassword');
+            ?>
+          </div>
         </div>
       </div>
+     </div>
       <div class="form-group">
         <div class="form-row">
-          <div class="col-md-6">
-            <div class="form-label-group">
-             <?php 
-                 $data = array(
-                   'class' => 'form-control',
-                   'name' => 'password',
-                   'requried' => 'requried',
-                   'id' => 'inputPassword',
-                   'placeholder' => '' 
-                 );
-                 echo form_password($data);
-                 echo form_label('Password','inputPassword');
-              ?>
-              </div>
-           </div>
            <div class="col-md-6">
              <div class="form-label-group">
               <?php 
@@ -101,6 +105,22 @@
                 echo form_label('Confirm Password','confirmPassword');
                ?>
                </div>
+            </div>
+            <div class="col-md-6">
+              <?php if($this->session->userdata('user_role') == 'admin'): ?>
+                <div class="form-label-group">
+                  <?php 
+                      $data = array(
+                      'class' => 'form-control',
+                      'name' => 'pin',
+                      'id' => 'pin',
+                      'placeholder' => ''
+                    );
+                    echo form_password($data);
+                    echo form_label('Enter Pin','pin');
+                  ?>
+                </div>
+              <?php endif; ?>
             </div>
          </div>
       </div>

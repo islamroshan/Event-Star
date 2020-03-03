@@ -27,9 +27,10 @@
       <div class="card-body">
         <!-- Form starts -->
          <?php echo form_open('event/add_event_controller/add_event'); ?>
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Event Name','eventname'); ?>
+                  <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Event Name','eventname',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 

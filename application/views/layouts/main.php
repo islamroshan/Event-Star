@@ -87,7 +87,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="<?php echo base_url('ticket/add_ticket_controller'); ?>">Add Ticket</a>
-          <a class="dropdown-item" href="<?php echo base_url('ticket/add_ticket_controller'); ?>">Add Stock</a>
+          <a class="dropdown-item" href="<?php echo base_url('ticket/add_ticket_controller/get_all_tickets'); ?>">Add Stock</a>
           <a class="dropdown-item" href="<?php echo base_url('ticket/ticket_list_controller'); ?>">Ticket List</a>
         </div>
       </li>
@@ -110,7 +110,7 @@
           <a class="dropdown-item" href="<?php echo base_url('print/print_invoice_controller'); ?>">Print Invoice</a>
         </div>
       </li>
-       <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-receipt"></i>
           <span>Overview</span>
@@ -120,6 +120,18 @@
           <a class="dropdown-item" href="<?php echo base_url('overview/ticket_stock_out'); ?>">Tickets out of stock</a>
         </div>
       </li>
+      <?php if($this->session->userdata('user_role') == 'admin'): ?>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-receipt"></i>
+            <span>Users</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="<?php echo base_url('user/register_controller'); ?>">Register User</a>
+            <a class="dropdown-item" href="<?php echo base_url('user/user_list_controller'); ?>">User List</a>
+          </div>
+        </li>
+      <?php endif; ?>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url('settings/settings_controller'); ?>">
           <i class="fas fa-cogs"></i>
@@ -160,19 +172,19 @@
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="<?php echo base_url(); ?>user/register_controller/logout_user">Logout</a>
-            </div>
-        </div>
+          <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+              </div>
+              <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+              <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+              <a class="btn btn-primary" href="<?php echo base_url(); ?>user/register_controller/logout_user">Logout</a>
+              </div>
+          </div>
         </div>
     </div>
 
@@ -201,6 +213,7 @@
    
     <script>
       var baseurl = "<?php echo base_url(); ?>";
+      var admin_pin = "<?php echo $this->session->userdata('pin') ?>";
     </script>
   </body>
 </html>

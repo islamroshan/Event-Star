@@ -8,7 +8,7 @@ class Ticket_stock_out_model extends CI_Model {
         $this->db->select('tickets.*,events.event_name');
         $this->db->from('tickets');
         $this->db->join('events','tickets.event_name = events.event_id','left');
-        $this->db->where('tickets.ticket_limit <=', 0);
+        $this->db->where('tickets.tickets_available <=', 0);
         $query = $this->db->get();
         if($query->num_rows() > 0)
         {
@@ -26,7 +26,7 @@ class Ticket_stock_out_model extends CI_Model {
          $this->db->select('*');
          $this->db->from('tickets');
          $this->db->like('ticket_name',$search_keyword);
-         $this->db->where('tickets.ticket_limit <=', 0);
+         $this->db->where('tickets.tickets_available <=', 0);
          $query = $this->db->get();
          if($query->num_rows() > 0)
          {

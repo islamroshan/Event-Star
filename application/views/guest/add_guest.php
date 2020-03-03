@@ -25,9 +25,10 @@
       <div class="card-body">
         <!-- Form starts -->
          <?php echo form_open('guest/add_guest_controller/add_guest'); ?>
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Guest Name','guestname'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Guest Name','guestname',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
@@ -42,9 +43,10 @@
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Contact Number','phone'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Contact Number','phone',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
@@ -59,9 +61,10 @@
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Address','address'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Address','address',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 

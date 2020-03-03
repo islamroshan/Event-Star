@@ -35,7 +35,6 @@ class Ticket_model extends CI_Model {
         $this->db->select('tickets.*,events.event_name');
         $this->db->from('tickets');
         $this->db->join('events','tickets.event_name = events.event_id','left');
-        $this->db->where('tickets.ticket_limit >=', 1);
         $query = $this->db->get();
         if($query->num_rows() > 0)
         {
@@ -119,7 +118,6 @@ class Ticket_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('tickets');
         $this->db->like('ticket_name',$search_keyword);
-        $this->db->where('tickets.ticket_limit >=', 1);
         $query = $this->db->get();
         if($query->num_rows() > 0)
         {
@@ -141,6 +139,32 @@ class Ticket_model extends CI_Model {
         );
         $this->db->where('ticket_id',$ticket_id);
         $this->db->update('tickets',$data);
+        return TRUE;
+    }
+
+    //ADD TICKET STOCK
+    public function add_stock($stock_details)
+    {
+        $ticket_id = $stock_details['select_ticket'];
+        $ticket_stock = $stock_details['ticket_stock'];
+
+
+        //GETING TICKET DETAIL
+        $get_ticket_detail = $this->db->where('ticket_id', $ticket_id);
+        $get_ticket_detail = $this->db->get('tickets');
+
+        $tickets_available = $get_ticket_detail->row(4)->tickets_available;
+        $total_tickets = $get_ticket_detail->row(3)->ticket_limit;
+
+        $total_tickets += $ticket_stock;
+        $tickets_available +=  $ticket_stock;
+
+        $data = array(
+            'ticket_limit' =>  $total_tickets,
+            'tickets_available' =>  $tickets_available
+        );
+       $update_tickets = $this->db->where('ticket_id',$ticket_id);
+       $update_tickets = $this->db->update('tickets',$data);
         return TRUE;
     }
 

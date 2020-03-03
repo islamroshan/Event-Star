@@ -26,7 +26,7 @@
 <div class="card mb-3">
  <div class="card-header">
    <i class="fas fa-table"></i>
-        Guest List
+        Expired Event List
   </div>
  <div class="card-body p-3">
     <div class="col-md-8 col-sm-12 p-0">

@@ -9,5 +9,9 @@
 .form-control:focus {
 	border-color: #007bffc7;
 	box-shadow: none;
-  }
- 
+}
+
+.form-group.required .control-label:after { 
+	content:" *";
+	color:red;
+}
