@@ -140,9 +140,9 @@
       </li>
     </ul>
 
-    <div id="content-wrapper">
+    <div id="content-wrapper" class="pl-1 pr-1 pt-1">
 
-      <div class="container-fluid">
+      <div class="container-fluid p-0 ">
 
         <!-- view files here -->
         <?php $this->load->view($main_view); ?> 
@@ -210,10 +210,8 @@
     <!-- Ajax select box -->
     <script src="<?php echo base_url(); ?>assets/select-box/js/bootstrap-select.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/custom_ajax.js"></script>
-   
-    <script>
-      var baseurl = "<?php echo base_url(); ?>";
-      var admin_pin = "<?php echo $this->session->userdata('pin') ?>";
-    </script>
+        
+    <?php $this->load->view('charts/post_data'); ?>
+     
   </body>
 </html>

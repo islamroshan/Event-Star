@@ -15,6 +15,7 @@ class Print_controller extends CI_Controller {
 		$data['guest_detail'] = $this->guest_model->get_guest_by_id($guest_id);
 		$this->load->view('print/print_invoice',$data);
 	}
+	
 	//Redirect to  print_controller
 	public function redirect()
 	{

@@ -27,5 +27,6 @@ class Edit_profile_model extends CI_Model {
 		$this->db->update('register_user',$data);
 		return TRUE;
 	}
+	
 }
 ?>

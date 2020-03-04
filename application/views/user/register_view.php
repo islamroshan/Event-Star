@@ -42,6 +42,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('firstname', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 
@@ -78,6 +79,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('useremail', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 
@@ -97,6 +99,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('password', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 

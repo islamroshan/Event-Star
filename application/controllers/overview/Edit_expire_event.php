@@ -12,17 +12,29 @@ class Edit_expire_event extends CI_Controller {
     
     //UPDATE Event INFO
     public function update_expire_event($event_id)
-    {
-        $event_detail = $this->input->post();
-        $query = $this->expired_event_model->update_expire_event($event_detail,$event_id);
-        if($query)
+    {   
+        //CHECKING THE VALIDATION
+        $this->form_validation->set_rules('eventname','event name','trim|required');
+
+        if($this->form_validation->run() == FALSE)
         {
-            $this->session->set_flashdata('expire_event_updated','Event Has Been Updated');
-            redirect('overview/expired_events_controller');
+            $data['event_info'] = $this->expired_event_model->get_event_info($event_id);
+            $data['main_view'] = 'overview/edit_expire_event';
+            $this->load->view('layouts/main',$data);
         }
-        else
-        {
-            redirect('dashboard_controller');
+        else 
+        {	
+            $event_detail = $this->input->post();
+            $query = $this->expired_event_model->update_expire_event($event_detail,$event_id);
+            if($query)
+            {
+                $this->session->set_flashdata('expire_event_updated','Event Has Been Updated');
+                redirect('overview/expired_events_controller');
+            }
+            else
+            {
+                redirect('dashboard_controller');
+            }
         }
     }
 

@@ -46,6 +46,7 @@ class Ticket_model extends CI_Model {
         }
     }
 
+    //GETTING TICKETS
     public function geting_tickets($event_id)
     {
         $where_condition = array('event_name' => $event_id, 'tickets_available >' =>  0);
@@ -67,6 +68,7 @@ class Ticket_model extends CI_Model {
         }
     }
 
+    //GETTING TICKET PRICE
     public function get_ticket_price($ticket_id)
     {
         $this->db->where('ticket_id',$ticket_id);
@@ -175,4 +177,5 @@ class Ticket_model extends CI_Model {
         $this->db->delete('tickets');
         return TRUE;
     }
+    
 }

@@ -13,16 +13,29 @@ class Edit_event_controller extends CI_Controller {
     //Update Event
     public function update_event($event_id)
     {
-        $event_detail = $this->input->post();
-        $query = $this->event_model->update_event($event_detail,$event_id);
-        if($query)
-        {
-            $this->session->set_flashdata('event_updated','Event Has Been Updated');
-            redirect('event/event_list_controller');
+        //CHECKING THE VALIDATION
+        $this->form_validation->set_rules('eventname','Event Name','trim|required');
+
+		if($this->form_validation->run() == FALSE)
+		{   
+            $data['event_detail'] = $this->event_model->get_events_by_id($event_id);
+			$data['main_view'] = 'event/edit_event';
+            $this->load->view('layouts/main',$data);
+
         }
-        else
+        else 
         {
-            redirect('dashboard_controller');
+            $event_detail = $this->input->post();
+            $query = $this->event_model->update_event($event_detail,$event_id);
+            if($query)
+            {
+                $this->session->set_flashdata('event_updated','Event Has Been Updated');
+                redirect('event/event_list_controller');
+            }
+            else
+            {
+                redirect('dashboard_controller');
+            }
         }
     }
     

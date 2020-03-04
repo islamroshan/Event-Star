@@ -20,23 +20,23 @@ class Ticket_stock_out_model extends CI_Model {
         }
     }
     
-     //To Search in database
-     public function search_tag($search_keyword)
-     {
-         $this->db->select('*');
-         $this->db->from('tickets');
-         $this->db->like('ticket_name',$search_keyword);
-         $this->db->where('tickets.tickets_available <=', 0);
-         $query = $this->db->get();
-         if($query->num_rows() > 0)
-         {
-             return $query->result();
-         }
-         else
-         {
-             return NULL;
-         }
-     }
+    //To Search in database
+    public function search_tag($search_keyword)
+    {
+        $this->db->select('*');
+        $this->db->from('tickets');
+        $this->db->like('ticket_name',$search_keyword);
+        $this->db->where('tickets.tickets_available <=', 0);
+        $query = $this->db->get();
+        if($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return NULL;
+        }
+    }
      
     //COUNT TOTAL TICKETS
     public function count_ticket_stock_out()
@@ -45,4 +45,5 @@ class Ticket_stock_out_model extends CI_Model {
         $query = $this->db->get('tickets');
         return $query->num_rows();
     }
+    
 }

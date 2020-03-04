@@ -31,6 +31,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('eventname', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
             <div class="form-group row">

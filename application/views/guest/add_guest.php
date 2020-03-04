@@ -40,6 +40,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('guestname', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 
@@ -58,6 +59,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('phone', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 
@@ -76,6 +78,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('address', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 

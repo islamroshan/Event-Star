@@ -20,21 +20,21 @@ class Expired_event_model extends CI_Model {
         }
     }
 
-     //To Search in database
-     public function search_tag($search_keyword)
-     {
-         $this->db->like('event_name',$search_keyword);
-         $this->db->where('MONTH(event_date) <', date('m'));
-         $query = $this->db->get('events');
-         if($query->num_rows() > 0)
-         {
-             return $query->result();
-         }
-         else
-         {
-             return NULL;
-         }
-     }
+    //To Search in database
+    public function search_tag($search_keyword)
+    {
+        $this->db->like('event_name',$search_keyword);
+        $this->db->where('MONTH(event_date) <', date('m'));
+        $query = $this->db->get('events');
+        if($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return NULL;
+        }
+    }
 
     //To get total rows
     public function count_expire_events_rows()
@@ -79,4 +79,5 @@ class Expired_event_model extends CI_Model {
         $this->db->delete('events');
         return TRUE;
     }
+
 }

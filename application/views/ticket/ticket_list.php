@@ -15,12 +15,12 @@
   </div>
 </div>
 <!-- DataTables -->
-<div class="card mb-3">
- <div class="card-header">
+<div class="card p-0 rounded-0">
+ <div class="card-header pl-2">
    <i class="fas fa-table"></i>
         Ticket List
   </div>
- <div class="card-body p-3">
+ <div class="card-body p-2">
     <div class="col-md-8 col-sm-12 p-0">
         <form action="<?php echo base_url('ticket/ticket_list_controller');?>" method="post">
            <div class="input-group mb-3 input-group">

@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class User_list_controller extends CI_Controller {
+
     //Initialize page
 	public function index()
 	{
@@ -66,4 +67,5 @@ class User_list_controller extends CI_Controller {
 	    //Pagination  Initiliazation
 	    $this->pagination->initialize($config);
 	}
+	
 }

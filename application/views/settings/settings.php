@@ -1,15 +1,6 @@
 <?php if($this->session->userdata('is_logged_in')): ?>
 <div class="row">
   <div class="col-md-12">
-   <?php if(isset($error)): ?>
-      <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
-        <?php echo $error;?>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
-      </div>    
-    <?php endif;?>
-
     <!-- if logo updated successfully  -->
     <?php if($this->session->flashdata('logo_updated')): ?>
     <div class="alert alert-success alert-dismissible fade show " role="alert">
@@ -21,23 +12,24 @@
     <?php endif;?>
 
      <!-- if settings updated successfully  -->
-     <?php if($this->session->flashdata('settings_updated')): ?>
-    <div class="alert alert-success alert-dismissible fade show " role="alert">
-        <?php echo $this->session->flashdata('settings_updated'); ?>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>    
+    <?php if($this->session->flashdata('settings_updated')): ?>
+      <div class="alert alert-success alert-dismissible fade show " role="alert">
+          <?php echo $this->session->flashdata('settings_updated'); ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>    
     <?php endif;?>
 
     <div class="card mb-3 ">
-      <div class="card-header"><i class="fas fa-table"></i> Change Logo</div>
+      <div class="card-header pl-2"><i class="fas fa-table"></i> Change Logo</div>
       <div class="card-body">
       
          <?php echo form_open_multipart('settings/settings_controller/update_logo'); ?>
-         <div class="form-group row">
+         <div class="form-group row required">
            <div class="col-md-2 col-form-label"> 
-              <?php  echo form_label('Upload Logo','companylogo'); ?>
+              <?php $attributes = array("class" => "control-label"); ?>
+              <?php  echo form_label('Upload Logo','companylogo',$attributes); ?>
            </div>
             <div class="col-md-4 col-md-offset-4">
              <div class="input-group mt-2">
@@ -46,6 +38,7 @@
                    <label class="custom-file-label" for="logo">max size 1MB (460x275)</label>
                  </div>
              </div>
+             <?php  if(!empty($error)){echo $error; } ?>
            </div>
          </div>
 
@@ -67,7 +60,7 @@
   </div>
   <div class="col-md-12">
     <div class="card mb-3 ">
-      <div class="card-header"><i class="fas fa-table"></i> Change Company Setting</div>
+      <div class="card-header pl-2"><i class="fas fa-table"></i> Change Company Setting</div>
       <div class="card-body">
         <?php 
             foreach ($ems_settings as $settings) 
@@ -82,9 +75,10 @@
             }
          ?>
          <?php echo form_open('settings/settings_controller/update_company'); ?>
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Company Name','companyname'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Company Name','companyname',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
@@ -97,6 +91,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('companyname', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 

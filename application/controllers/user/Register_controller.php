@@ -12,19 +12,31 @@ class Register_controller extends CI_Controller {
     //To Register New User 
 	public function register_user()
 	{	
-		$user_detail = $this->input->post();
-        $query = $this->register_user_model->create_user($user_detail);
-        if($query)
-        {
-            $this->session->set_flashdata('user_registered','User has been registered');
-            redirect('user/register_controller');
-        }
-        else
-        {
-            $this->session->set_flashdata('not_registered','User has not been registered');
-			redirect('user/register_controller');
+		//CHECKING THE VALIDATION
+		$this->form_validation->set_rules('firstname','first name','trim|required');
+		$this->form_validation->set_rules('useremail','email','trim|required');
+		$this->form_validation->set_rules('password','password','trim|required');
+
+		if($this->form_validation->run() == FALSE)
+		{
+			$data['main_view'] = 'user/register_view';
+			$this->load->view('layouts/main',$data);
 		}
-		
+		else
+		{
+			$user_detail = $this->input->post();
+			$query = $this->register_user_model->create_user($user_detail);
+			if($query)
+			{
+				$this->session->set_flashdata('user_registered','User has been registered');
+				redirect('user/register_controller');
+			}
+			else
+			{
+				$this->session->set_flashdata('not_registered','User has not been registered');
+				redirect('user/register_controller');
+			}
+		}
 	}
 	
 	// Login to dashboard

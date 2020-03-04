@@ -13,19 +13,33 @@ class Add_ticket_controller extends CI_Controller {
     //ADD TICKET
     public function add_ticket()
     {
-        $ticket = $this->input->post();
-        $query = $this->ticket_model->add_ticket($ticket);
-        if($query)
-        {
-            $this->session->set_flashdata('ticket_added','Ticket Has Been Added');
-            redirect('ticket/add_ticket_controller');
+        //CHECKING THE VALIDATION
+        $this->form_validation->set_rules('ticketname','ticket name','trim|required');
+        $this->form_validation->set_rules('price','price','trim|required');
+
+		if($this->form_validation->run() == FALSE)
+		{
+			$data['events'] = $this->event_model->get_all_events();
+            $data['main_view'] = 'ticket/add_ticket';
+            $this->load->view('layouts/main',$data);
         }
-        else
+        else 
         {
-            $this->session->set_flashdata('ticket_not_added','Ticket Has Not Been Added');
-            redirect('ticket/add_ticket_controller');
+            $ticket = $this->input->post();
+            $query = $this->ticket_model->add_ticket($ticket);
+            if($query)
+            {
+                $this->session->set_flashdata('ticket_added','Ticket Has Been Added');
+                redirect('ticket/add_ticket_controller');
+            }
+            else
+            {
+                $this->session->set_flashdata('ticket_not_added','Ticket Has Not Been Added');
+                redirect('ticket/add_ticket_controller');
+            }
         }
     }
+
     //ADD TICKET STOCK
     public function get_all_tickets()
     {

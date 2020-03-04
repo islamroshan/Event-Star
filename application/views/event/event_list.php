@@ -10,25 +10,15 @@
           </button>
       </div>    
     <?php endif;?>
-
-     <!-- if deleted successfully  -->
-     <!-- <?php if($this->session->flashdata('event_deleted')): ?>
-      <div class="alert alert-danger alert-dismissible fade show " role="alert">
-          <?php echo $this->session->flashdata('event_deleted'); ?>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
-      </div>    
-    <?php endif;?> -->
   </div>
 </div>
 <!-- DataTables -->
-<div class="card mb-3">
- <div class="card-header">
+<div class="card rounded-0">
+ <div class="card-header pl-2">
    <i class="fas fa-table"></i>
         Event List
   </div>
- <div class="card-body p-3">
+ <div class="card-body p-2">
     <div class="col-md-8 col-sm-12 p-0">
         <form action="<?php echo base_url('event/event_list_controller');?>" method="post">
            <div class="input-group mb-3 input-group">
@@ -89,7 +79,7 @@
     <?php endif; ?>
    </div>
     <?php else: ?>
-    <p class="pl-4"> No Data Available</p>
+      <p class="pl-4"> No Data Available</p>
     <?php endif; ?>
  </div>
 </div>

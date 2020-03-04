@@ -33,6 +33,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('ticketname', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 
@@ -53,6 +54,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('price', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
             

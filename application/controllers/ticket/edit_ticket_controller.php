@@ -13,17 +13,31 @@ class Edit_ticket_controller extends CI_Controller {
 
     //Update Event
     public function update_ticket($ticket_id)
-    {
-        $ticket_detail = $this->input->post();
-        $query = $this->ticket_model->update_ticket($ticket_detail,$ticket_id);
-        if($query)
-        {
-            $this->session->set_flashdata('ticket_updated','Ticket Has Been Updated');
-            redirect('ticket/ticket_list_controller');
+    {   
+        //CHECKING THE VALIDATION
+        $this->form_validation->set_rules('ticketname','ticket name','trim|required');
+        $this->form_validation->set_rules('price','price','trim|required');
+        
+		if($this->form_validation->run() == FALSE)
+		{
+            $data['event_list'] = $this->event_model->get_all_events();
+            $data['ticket_detail'] = $this->ticket_model->get_tickets_by_id($ticket_id);
+            $data['main_view'] = 'ticket/edit_ticket';
+            $this->load->view('layouts/main',$data);
         }
-        else
+        else 
         {
-            redirect('dashboard_controller');
+            $ticket_detail = $this->input->post();
+            $query = $this->ticket_model->update_ticket($ticket_detail,$ticket_id);
+            if($query)
+            {
+                $this->session->set_flashdata('ticket_updated','Ticket Has Been Updated');
+                redirect('ticket/ticket_list_controller');
+            }
+            else
+            {
+                redirect('dashboard_controller');
+            } 
         }
     }
 

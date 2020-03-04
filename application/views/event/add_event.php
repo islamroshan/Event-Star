@@ -1,7 +1,7 @@
 <?php if($this->session->userdata('is_logged_in')): ?>
 <div class="row">
   <div class="col-md-12">
-  
+
   <!-- if add successfully  -->
   <?php if($this->session->flashdata('event_created')): ?>
       <div class="alert alert-success alert-dismissible fade show " role="alert">
@@ -21,8 +21,8 @@
           </button>
       </div>    
     <?php endif;?>
-
-    <div class="card  mb-3 ">
+      
+    <div class="card">
       <div class="card-header"><i class="fas fa-table"></i> Add New Event</div>
       <div class="card-body">
         <!-- Form starts -->
@@ -42,6 +42,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('eventname', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
             <div class="form-group row">

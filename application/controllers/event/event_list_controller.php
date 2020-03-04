@@ -27,7 +27,8 @@ class Event_list_controller extends CI_Controller {
 
         $data['main_view'] = 'event/event_list';
         $this->load->view('layouts/main',$data);   
-    }
+	}
+	
     //Load Pagination
 	public function page()
 	{
