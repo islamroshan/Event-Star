@@ -210,7 +210,8 @@
     <!-- Ajax select box -->
     <script src="<?php echo base_url(); ?>assets/select-box/js/bootstrap-select.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/custom_ajax.js"></script>
-        
+    
+    <!-- LOAD BASE_URL AND SOME POST DATA TO JAVACRIPT    -->
     <?php $this->load->view('charts/post_data'); ?>
      
   </body>

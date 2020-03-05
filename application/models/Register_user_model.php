@@ -1,9 +1,6 @@
 <?php
 class Register_user_model extends CI_Model {
     
-    //Variables
-	private $user_id;
-	
 	//GETTER FUNCTION TO GET THE VAIRABLE
 	public function get($name)
 	{
@@ -17,9 +14,9 @@ class Register_user_model extends CI_Model {
 	}
     
     // To Get users
-	public function get_user()
+	public function get_user($user_id)
 	{
-		$this->db->where('user_id', $this->user_id);
+		$this->db->where('user_id', $user_id);
 		$query = $this->db->get('register_user');
 		return $query->result();
 	}
@@ -27,39 +24,67 @@ class Register_user_model extends CI_Model {
 	//Create User
 	 public function create_user($user_detail)
 	 {
-	 	$option = ['cost' => 12];
-		$encripted_pass = password_hash($user_detail['password'] ,  PASSWORD_BCRYPT , $option);
+		$user_email = html_escape($user_detail['useremail']);
 
-	 	$user_data = array(
-	 		'first_name' => html_escape($user_detail['firstname']),
-	 		'user_password' => html_escape($encripted_pass) ,
-	 		'last_name' => html_escape($user_detail['lastname']),
-			'user_email' => html_escape($user_detail['useremail']),
-			'user_role' => html_escape('user'),
-	 	);
-	 	$insert_data = $this->db->insert('register_user', $user_data);
-	 	return TRUE;
+		//CHECKING IN DATABASE IF ANY USER WITH SAME EMAIL EXISTS.
+		
+		$check_email = $this->db->select('*');
+		$check_email = $this->db->from('register_user');
+		$check_email = $this->db->like('user_email', $user_email);
+		$check_email=  $this->db->get();
+		$result = $check_email->num_rows();
+		if($result >= 1 )
+		{
+			return FALSE;
+		}
+		else
+		{
+			$option = ['cost' => 12];
+			$encripted_pass = password_hash($user_detail['password'] , PASSWORD_BCRYPT , $option);
+
+			$user_data = array(
+				'first_name' => html_escape($user_detail['firstname']),
+				'user_password' => html_escape($encripted_pass) ,
+				'last_name' => html_escape($user_detail['lastname']),
+				'user_email' => html_escape($user_email),
+				'user_role' => html_escape('user'),
+			);
+			$insert_data = $this->db->insert('register_user', $user_data);
+			return TRUE;
+		}
 	 }
 
 	 // Login User into dashboard
-	 public function login()
+	 public function login($login_details)
 	 {
-	 	$email = html_escape($this->input->post('useremail'));
-		$password = html_escape($this->input->post('userpassword'));
-		$admin_pin = html_escape($this->input->post('pin'));
-		if(empty($admin_pin))
+		$email = html_escape($login_details['useremail']);
+		$password = html_escape($login_details['userpassword']);
+		$admin_pin = html_escape($login_details['pin']);
+		$db_password = '';
+		$pin = '';
+        
+		if(empty($admin_pin)) { $admin_pin = 1; }
+
+		if(!empty($email) && !empty($password))
 		{
-			$admin_pin = 0;
+			$this->db->where('user_email', $email);
+			$result = $this->db->get('register_user');
+	
+			$db_password = $result->row(4)->user_password;
+		}
+		else if(!empty($admin_pin))
+		{
+		    $this->db->where('user_role', 'admin');
+			$result = $this->db->get('register_user');
+	
+			$pin = $result->row(5)->pin;
+		}
+		else
+		{
+			return FALSE;
 		}
 
-		$this->db->where('user_email', $email);
-		$this->db->or_where('pin', $admin_pin);
-		$result = $this->db->get('register_user');
-
-		$db_password = $result->row(4)->user_password;
-		$pin = $result->row(5)->pin;
-
-	 	if(password_verify($password, $db_password) || $admin_pin == $pin)
+	 	if(password_verify($password, $db_password) || $admin_pin == $pin && $admin_pin != 0)
 	 	{
 	 		return $result->row(0)->user_id;
 	 	} 
@@ -131,17 +156,34 @@ class Register_user_model extends CI_Model {
 	 //UPDATE USER
 	 public function update_user($user_details,$user_id)
 	 {
-		$option = ['cost' => 12];
-		$encripted_pass = password_hash($user_detail['user_password'] ,  PASSWORD_BCRYPT , $option);
-		 $data = array(
-			 'first_name' => $user_details['first_name'],
-			 'last_name' => $user_details['last_name'],
-			 'user_email' => $user_details['user_email'],
-			 'user_password' => $encripted_pass
-		 );
-		 $this->db->where('user_id',$user_id);
-		 $this->db->update('register_user',$data);
-		 return TRUE;
+		$user_email = html_escape($user_details['user_email']);
+
+		//CHECKING IN DATABASE IF ANY USER WITH SAME EMAIL EXISTS.
+		
+		$check_email = $this->db->select('*');
+		$check_email = $this->db->from('register_user');
+		$check_email = $this->db->like('user_email', $user_email);
+		$check_email=  $this->db->get();
+		$result = $check_email->num_rows();
+
+		if($result >= 1 )
+		{
+			return FALSE;
+		}
+		else
+		{
+			$option = ['cost' => 12];
+			$encripted_pass = password_hash($user_details['user_password'] ,  PASSWORD_BCRYPT , $option);
+			 $data = array(
+				 'first_name' => $user_details['first_name'],
+				 'last_name' => $user_details['last_name'],
+				 'user_email' => $user_details['user_email'],
+				 'user_password' => $encripted_pass
+			 );
+			 $this->db->where('user_id',$user_id);
+			 $this->db->update('register_user',$data);
+			 return TRUE;
+		}
 	 }
 
 	 //DELETE FROM DATABASE

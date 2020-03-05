@@ -12,6 +12,16 @@
       </div>    
     <?php endif;?>
 
+     <!-- if not updated successfully  -->
+     <?php if($this->session->flashdata('user_not_updated')): ?>
+      <div class="alert alert-danger alert-dismissible fade show " role="alert">
+          <?php echo $this->session->flashdata('user_not_updated'); ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>    
+    <?php endif;?>
+
   </div>
 </div>
 <!-- DataTables -->

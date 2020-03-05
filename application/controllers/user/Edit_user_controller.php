@@ -14,9 +14,9 @@ class Edit_user_controller extends CI_Controller {
     public function update_user($user_id)
     {
         //CHECKING THE VALIDATION
-        $this->form_validation->set_rules('first_name','Event Name','trim|required');
-        $this->form_validation->set_rules('user_email','Event Name','trim|required');
-        $this->form_validation->set_rules('user_password','Event Name','trim|required');
+        $this->form_validation->set_rules('first_name','first name','trim|required');
+        $this->form_validation->set_rules('user_email','email','trim|required');
+        $this->form_validation->set_rules('user_password','password','trim|required');
 
 		if($this->form_validation->run() == FALSE)
 		{
@@ -35,7 +35,8 @@ class Edit_user_controller extends CI_Controller {
             }
             else
             {
-                redirect('dashboard_controller');
+                $this->session->set_flashdata('user_not_updated','User has not been updated or user aleady exist with same user email');
+                redirect('user/user_list_controller');
             }
         }
     }

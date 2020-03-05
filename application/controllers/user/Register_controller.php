@@ -33,7 +33,7 @@ class Register_controller extends CI_Controller {
 			}
 			else
 			{
-				$this->session->set_flashdata('not_registered','User has not been registered');
+				$this->session->set_flashdata('not_registered','User has not been registered or user already registered.');
 				redirect('user/register_controller');
 			}
 		}
@@ -42,9 +42,10 @@ class Register_controller extends CI_Controller {
 	// Login to dashboard
 	public function login_user()
 	{
-		$user_id = $this->register_user_model->login();
-		$this->register_user_model->set('user_id',$user_id);
-		$data = $this->register_user_model->get_user();
+		$login_details = $this->input->post();
+		$user_id = $this->register_user_model->login($login_details);
+
+		$data = $this->register_user_model->get_user($user_id);
 		if(!empty($data))
 		{
 		    foreach ($data as $value) 
@@ -69,7 +70,8 @@ class Register_controller extends CI_Controller {
 		}
 		else 
 		{
-		   redirect('user/register_controller/register_user');
+		   $this->session->set_flashdata('user_not_found','User not found. Please try again. ');
+		   redirect('login_controller');
 		}
     }
     
