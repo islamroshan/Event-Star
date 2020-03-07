@@ -20,11 +20,13 @@ class Edit_profile_model extends CI_Model {
             'first_name' => html_escape($user_data['firstname']),
             'last_name' => html_escape($user_data['lastname']),
             'user_email' => html_escape($user_data['useremail']),
-            'user_password' => html_escape($encripted_pass)
+			'user_password' => html_escape($encripted_pass),
+			'pin' => html_escape($user_data['pin'])
         );
 		$this->db->where('user_id' , $user_id);
 		$this->db->update('register_user',$data);
 		return TRUE;
 	}
+	
 }
 ?>

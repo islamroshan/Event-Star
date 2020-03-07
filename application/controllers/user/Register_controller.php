@@ -1,31 +1,40 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Register_controller extends CI_Controller {
-    
+	 
+	//Initialize page
+	public function index()
+	{
+        $data['main_view'] = 'user/register_view';
+        $this->load->view('layouts/main',$data);
+	}
+
     //To Register New User 
 	public function register_user()
-	{
-		$this->form_validation->set_rules('firstname','Username','trim|required|min_length[3]');
-		$this->form_validation->set_rules('lastname','Last Name','trim|required|min_length[3]');
-		$this->form_validation->set_rules('useremail','Email','trim|required|min_length[3]');
-		$this->form_validation->set_rules('password','Password','trim|required|min_length[3]');
-		$this->form_validation->set_rules('confirmpassword','Confirm Password','trim|required|min_length[3]|matches[password]');
+	{	
+		//CHECKING THE VALIDATION
+		$this->form_validation->set_rules('firstname','first name','trim|required');
+		$this->form_validation->set_rules('useremail','email','trim|required');
+		$this->form_validation->set_rules('password','password','trim|required');
 
 		if($this->form_validation->run() == FALSE)
 		{
-			$data = array(
-				'errors' => validation_errors()
-			);
-			
-			$this->load->view('user/register_view');
-		} else {	
-			
-			if($this->register_user_model->create_user())
+			$data['main_view'] = 'user/register_view';
+			$this->load->view('layouts/main',$data);
+		}
+		else
+		{
+			$user_detail = $this->input->post();
+			$query = $this->register_user_model->create_user($user_detail);
+			if($query)
 			{
-				$this->session->set_flashdata('user_registered', 'User has been registered');
-				redirect('Login_controller');
-			} else {
-
+				$this->session->set_flashdata('user_registered','User has been registered');
+				redirect('user/register_controller');
+			}
+			else
+			{
+				$this->session->set_flashdata('not_registered','User has not been registered or user already registered.');
+				redirect('user/register_controller');
 			}
 		}
 	}
@@ -33,36 +42,38 @@ class Register_controller extends CI_Controller {
 	// Login to dashboard
 	public function login_user()
 	{
-		$user_id = $this->register_user_model->login();
-		$this->register_user_model->set('user_id',$user_id);
-		$data = $this->register_user_model->get_user();
+		$login_details = $this->input->post();
+		$user_id = $this->register_user_model->login($login_details);
+
+		$data = $this->register_user_model->get_user($user_id);
 		if(!empty($data))
 		{
-		   foreach ($data as $value) {
-		   $sess_data = array(
-		               'id'           => $value->user_id,
-		               'username'     => $value->first_name
-		             );
-		   $this->session->set_userdata($sess_data);
-	     }
+		    foreach ($data as $value) 
+		    {
+				$sess_data = array(
+					'user_role'	   => $value->user_role,
+					'username'     => $value->first_name,
+					'pin' 		   => $value->pin
+					);
+				$this->session->set_userdata($sess_data);
+	    	}
 		}
 		
 		if($user_id)
 		{
-		    $email = html_escape($this->input->post('useremail'));
 			$user_data = array(
-				'email' => $email,
 				'user_id' => $user_id,
-				'is_logged_in' => true
+				'is_logged_in' => true,
 			);
 			$this->session->set_userdata($user_data);
 			redirect('dashboard_controller');
-		}else 
-		{
-		   redirect('user/register_controller/register_user');
 		}
-		 
-    	}
+		else 
+		{
+		   $this->session->set_flashdata('user_not_found','User not found. Please try again. ');
+		   redirect('login_controller');
+		}
+    }
     
     //To Logout
 	 public function logout_user()

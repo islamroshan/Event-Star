@@ -1,6 +1,7 @@
 <?php if($this->session->userdata('is_logged_in')): ?>
 <div class="row">
   <div class="col-md-12">
+
       <!-- if updated successfully  -->
       <?php if($this->session->flashdata('ticket_updated')): ?>
       <div class="alert alert-success alert-dismissible fade show " role="alert">
@@ -11,24 +12,15 @@
       </div>    
     <?php endif;?>
 
-     <!-- if deleted successfully  -->
-     <?php if($this->session->flashdata('ticket_deleted')): ?>
-      <div class="alert alert-danger alert-dismissible fade show " role="alert">
-          <?php echo $this->session->flashdata('ticket_deleted'); ?>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
-      </div>    
-    <?php endif;?>
   </div>
 </div>
 <!-- DataTables -->
-<div class="card mb-3">
- <div class="card-header">
+<div class="card p-0 rounded-0">
+ <div class="card-header pl-2">
    <i class="fas fa-table"></i>
         Ticket List
   </div>
- <div class="card-body p-3">
+ <div class="card-body p-2">
     <div class="col-md-8 col-sm-12 p-0">
         <form action="<?php echo base_url('ticket/ticket_list_controller');?>" method="post">
            <div class="input-group mb-3 input-group">
@@ -48,7 +40,9 @@
           <th>Ticket Name</th>
           <th>Event Name</th>
           <th>Price</th>
-          <th>Ticket Limit</th>
+          <th>Total Ticket</th>
+          <th>Ticket Available</th>
+          <th>Ticket Issued</th>
           <th>Action</th>
         </tr>
        </thead>
@@ -58,7 +52,9 @@
           <th>Ticket Name</th>
           <th>Event Name</th>
           <th>Price</th>
-          <th>Ticket Limit</th>
+          <th>Total Ticket</th>
+          <th>Ticket Available</th>
+          <th>Ticket Issued</th>
           <th>Action</th>
          </tr>
        </tfoot>
@@ -68,12 +64,14 @@
            foreach ($tickets_list as $tickets) 
            {
              $i = ++$i;
-             echo '<tr>';
+             echo '<tr id="hide_animate">';
              echo '<td>'. html_escape($i) .'</td>';
              echo '<td>'. html_escape($tickets->ticket_name).'</td>';
              echo '<td>'. html_escape($tickets->event_name).'</td>';
              echo '<td>'. html_escape($currency).' '. html_escape($tickets->ticket_price).'</td>';
              echo '<td>'. html_escape($tickets->ticket_limit).'</td>';
+             echo '<td>'. html_escape($tickets->tickets_available).'</td>';
+             echo '<td>'. html_escape($tickets->tickets_issued).'</td>';
              echo '<td>
                     <div class="btn-group btn-group"> 
                        <a href="'.base_url().'ticket/edit_ticket_controller/edit_ticket/'. $tickets->ticket_id  .'" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>

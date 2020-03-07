@@ -17,9 +17,10 @@
       ?>
         <!-- Form starts -->
          <?php echo form_open('ticket/edit_ticket_controller/update_ticket/'.html_escape($this->uri->segment(4))); ?>
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Ticket Name','ticketname'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Ticket Name','ticketname',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
@@ -32,39 +33,44 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('ticketname', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Price per Unit','price'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Price per Unit','price',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
                     $data = array(
                       'class' => 'form-control',
                       'name' => 'price',
+                      'type' => 'number',
                       'value' => $ticket['price'],
                       'id' => 'price',
                       'placeholder' => '' 
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('price', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
             
             <div class="form-group row">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Ticket Limit','limit'); ?>
+                 <?php  echo form_label('Total Tickets','total'); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
                     $data = array(
                       'class' => 'form-control',
-                      'name' => 'limit',
+                      'name' => 'total',
                       'type' => 'number',
                       'value' => $ticket['limit'],
-                      'id' => 'limit',
+                      'disabled' => TRUE,
+                      'id' => 'total',
                       'placeholder' => '' 
                     );
                     echo form_input($data);    
@@ -74,10 +80,10 @@
 
             <div class="form-group row">
               <div class="col-md-2 col-form-label"> 
-                <label for="plan">Select Event</label>
+                <label for="plan">Event Name</label>
               </div>
                <div class="col-md-4 col-md-offset-4">  
-                    <select id="plan" name="selectevent" class="form-control">  
+                    <select id="plan" name="selectevent" class="form-control" disabled>  
                         <?php  foreach ($event_list as $event): ?>
                         
                             <option  value="<?php echo  html_escape($event->event_id); ?>" <?php if($ticket['event_name'] == $event->event_id){?> selected="selected"  <?php } ?> > <?php echo  html_escape($event->event_name); ?> 
@@ -92,7 +98,7 @@
               <div class="col-sm-10"> 
                  <?php 
                     $data = array(
-                      'class' => 'btn btn-outline-primary',
+                      'class' => 'btn btn-outline-primary edit_verification',
                       'name' => 'edit_ticket',
                       'value' => 'Update'
                     );

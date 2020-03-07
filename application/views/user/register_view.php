@@ -1,138 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php if($this->session->userdata('is_logged_in')  && $this->session->userdata('user_role') == 'admin' ): ?>
+<div class="row">
+  <div class="col-md-12">
+    <!-- if add successfully  -->
+    <?php if($this->session->flashdata('user_registered')): ?>
+      <div class="alert alert-success alert-dismissible fade show " role="alert">
+          <?php echo $this->session->flashdata('user_registered'); ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>    
+    <?php endif;?>
 
-<head>
+     <!-- if not add successfully  -->
+    <?php if($this->session->flashdata('not_registered')): ?>
+      <div class="alert alert-danger alert-dismissible fade show " role="alert">
+          <?php echo $this->session->flashdata('not_registered'); ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>    
+      <?php echo form_error(); ?>
+    <?php endif;?>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Event Star - Register</title>
-
-  <!-- Custom fonts for this template-->
-  <link href="<?php echo base_url(); ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-  <!-- Custom styles for this template-->
-  <link href="<?php echo base_url(); ?>assets/css/sb-admin.css" rel="stylesheet">
-  <link href="<?php echo base_url(); ?>assets/css/custom-style.css" rel="stylesheet">
-
-</head>
-
-<body class="login-color">
-
-  <div class="container">
-    <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Register an Account</div>
+    <div class="card  mb-3 ">
+      <div class="card-header"><i class="fas fa-table"></i> Register User</div>
       <div class="card-body">
-         <?php echo '<span class="text-danger">'. validation_errors() .'</span>'; ?>
-        <!-- <form> -->
-          <?php echo form_open('user/register_controller/register_user'); ?>
-               <div class="form-group">
-                 <div class="form-row">
-                   <div class="col-md-6">
-                     <div class="form-label-group">
-                      <?php 
-                          $data = array(
-                            'class' => 'form-control',
-                            'name' => 'firstname',
-                            'id' => 'firstName',
-                            'placeholder' => 'First Name',
-                            'autofocus' => 'autofocus' 
-                          );
-                          echo form_input($data);
-                          echo form_label('First Name','firstName');
-                       ?>
-                       </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-label-group">
-                       <?php 
-                           $data = array(
-                             'class' => 'form-control',
-                             'name' => 'lastname',
-                             'id' => 'lastName',
-                             'placeholder' => 'Last Name'
-                           );
-                           echo form_input($data);
-                           echo form_label('Last Name','lastName');
-                        ?>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="form-group">
-                  <div class="form-label-group">
-                    <?php 
-                     $data = array(
-                      'class' => 'form-control',
-                      'id' => 'inputEmail',
-                      'placeholder' => 'Email Address',
-                      'name' => 'useremail'
-                     );
-                     echo form_input($data);
-                     echo form_label('Email address','inputEmail');
-                     ?>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="form-row">
-                    <div class="col-md-6">
-                      <div class="form-label-group">
-                       <?php 
-                           $data = array(
-                             'class' => 'form-control',
-                             'name' => 'password',
-                             'id' => 'inputPassword',
-                             'placeholder' => 'Password' 
-                           );
-                           echo form_password($data);
-                           echo form_label('Password','inputPassword');
-                        ?>
-                        </div>
-                     </div>
-                     <div class="col-md-6">
-                       <div class="form-label-group">
-                        <?php 
-                            $data = array(
-                            'class' => 'form-control',
-                            'name' => 'confirmpassword',
-                            'id' => 'confirmPassword',
-                            'placeholder' => 'Confirm Password'
-                          );
-                          echo form_password($data);
-                          echo form_label('Confirm Password','confirmPassword');
-                         ?>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-                <div class="form-group">
-                  <?php 
+        <!-- Form starts -->
+         <?php echo form_open('user/register_controller/register_user'); ?>
+            <div class="form-group row required">
+              <div class="col-md-2 col-form-label">
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('First Name','firstname',$attributes); ?>
+              </div>
+              <div class="col-md-4 col-md-offset-4">
+                <?php 
                     $data = array(
-                      'class' => 'btn btn-primary  btn-block',
+                      'class' => 'form-control',
+                      'name' => 'firstname',
+                      'id' => 'firstname',
+                      'placeholder' => 'Enter first name' 
+                    );
+                    echo form_input($data);    
+                 ?>
+                 <?php echo form_error('firstname', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-2 col-form-label">
+                 <?php  echo form_label('Last Name','lastname'); ?>
+              </div>
+              <div class="col-md-4 col-md-offset-4">
+                <?php 
+                    $data = array(
+                      'class' => 'form-control',
+                      'name' => 'lastname',
+                      'id' => 'lastname',
+                      'placeholder' => 'Enter last name' 
+                    );
+                    echo form_input($data);    
+                 ?>
+              </div>
+            </div>
+            
+            <div class="form-group row required">
+              <div class="col-md-2 col-form-label">
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Email','useremail',$attributes); ?>
+              </div>
+              <div class="col-md-4 col-md-offset-4">
+                <?php 
+                    $data = array(
+                      'class' => 'form-control',
+                      'name' => 'useremail',
+                      'type' => 'useremail',
+                      'id' => 'useremail',
+                      'placeholder' => 'Enter email' 
+                    );
+                    echo form_input($data);    
+                 ?>
+                 <?php echo form_error('useremail', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
+              </div>
+            </div>
+
+            <div class="form-group row required">
+              <div class="col-md-2 col-form-label">
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Password','password',$attributes); ?>
+              </div>
+              <div class="col-md-4 col-md-offset-4">
+                <?php 
+                    $data = array(
+                      'class' => 'form-control',
+                      'name' => 'password',
+                      'type' => 'password',
+                      'id' => 'password',
+                      'placeholder' => 'Enter password' 
+                    );
+                    echo form_input($data);    
+                 ?>
+                 <?php echo form_error('password', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-10"> 
+                 <?php 
+                    $data = array(
+                      'class' => 'btn btn-outline-primary edit_verification',
                       'name' => 'register_user',
                       'value' => 'Register'
                     );
-                    echo form_submit($data);
-                   ?>
-                </div>
-          <?php echo form_close(); ?>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="<?php echo base_url(); ?>login_controller">Login Page</a>
-        </div>
+                    echo form_submit($data);    
+                 ?>
+              </div>
+            </div>
+         <?php echo form_close(); ?>
       </div>
     </div>
   </div>
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="<?php echo base_url(); ?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-</body>
-
-</html>
+</div>
+<?php else:  ?>
+<?php redirect('login_controller'); ?>
+<?php endif; ?>

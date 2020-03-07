@@ -26,9 +26,10 @@
       <div class="card-body">
         <!-- Form starts -->
          <?php echo form_open('ticket/add_ticket_controller/add_ticket'); ?>
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Ticket Name','ticketname'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Ticket Name','ticketname', $attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
@@ -40,23 +41,27 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('ticketname', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Price per Unit','price'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Price per Unit','price',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
                     $data = array(
                       'class' => 'form-control',
                       'name' => 'price',
+                      'type' => 'number',
                       'id' => 'price',
                       'placeholder' => 'Price' 
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('price', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
             
@@ -86,7 +91,8 @@
                     <select class="selectpicker form-control" name="selectevent" data-live-search="true">  
                         <option value="">Select</option>
                         <?php   
-                          foreach ($events as $event) {
+                          foreach ($events as $event) 
+                          {
                             echo '<option value="'. html_escape($event->event_id) .'" >'. html_escape($event->event_name) .'</option>';
                           }
                          ?>

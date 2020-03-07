@@ -54,5 +54,6 @@ class Setting_model extends CI_Model {
 		$this->db->update('ems_settings', $data);
 		return TRUE;
 	}
+	
  }
 ?>

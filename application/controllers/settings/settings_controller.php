@@ -13,12 +13,24 @@ class Settings_controller extends CI_Controller {
     //To Update Brand Name
 	public function update_company()
 	{
-		$ems_details = $this->input->post();
-		$this->setting_model->update_company($ems_details);
-		if($this->setting_model->update_company($ems_details))
+		//CHECKING THE VALIDATION
+        $this->form_validation->set_rules('companyname','company name','trim|required');
+
+		if($this->form_validation->run() == FALSE)
 		{
-			$this->session->set_flashdata('settings_updated','Your Settings Has Been Updated Succesfully');
-			redirect('settings/settings_controller');
+			$data['ems_settings'] = $this->setting_model->get_settings();
+			$data['main_view'] = "settings/settings";
+			$this->load->view('layouts/main', $data);
+		}
+		else
+		{
+			$ems_details = $this->input->post();
+			$this->setting_model->update_company($ems_details);
+			if($this->setting_model->update_company($ems_details))
+			{
+				$this->session->set_flashdata('settings_updated','Your Settings Has Been Updated Succesfully');
+				redirect('settings/settings_controller');
+			}
 		}
 	}
     
@@ -33,9 +45,9 @@ class Settings_controller extends CI_Controller {
 
 		$this->load->library('upload', $config);
 		 
-		if ( ! $this->upload->do_upload('companylogo'))
+		if (!$this->upload->do_upload('companylogo'))
 		{
-    		$data = array('error' => $this->upload->display_errors());
+			$data = array('error' =>$this->upload->display_errors('<div class="text-danger pt-1 font-italic">', '</div>'));
     		$data['ems_settings'] = $this->setting_model->get_settings();
     		$data['main_view'] = "settings/settings";
     		$this->load->view('layouts/main', $data);

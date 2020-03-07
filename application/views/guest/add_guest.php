@@ -25,9 +25,10 @@
       <div class="card-body">
         <!-- Form starts -->
          <?php echo form_open('guest/add_guest_controller/add_guest'); ?>
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Guest Name','guestname'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Guest Name','guestname',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
@@ -39,12 +40,14 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('guestname', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Contact Number','phone'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Contact Number','phone',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
@@ -56,12 +59,14 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('phone', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
               <div class="col-md-2 col-form-label">
-                 <?php  echo form_label('Address','address'); ?>
+                 <?php $attributes = array("class" => "control-label"); ?>
+                 <?php  echo form_label('Address','address',$attributes); ?>
               </div>
               <div class="col-md-4 col-md-offset-4">
                 <?php 
@@ -73,6 +78,7 @@
                     );
                     echo form_input($data);    
                  ?>
+                 <?php echo form_error('address', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
               </div>
             </div>
 
@@ -135,31 +141,44 @@
                 <label for="eventname">Event Name</label>
               </div>
                <div class="col-md-4 col-md-offset-4">  
-                 <select class="selectpicker form-control" name="eventname" data-live-search="true">  
+                 <select class="selectpicker form-control" id="event_picker" title="Select event"  name="eventname" data-live-search="true"> 
                         <?php   
                           foreach ($events as $event) {
-                            echo '<option value="'. html_escape($event->event_id) .'" >'. html_escape($event->event_name) .'</option>';
+                            echo '<option data-subtext="(Event on: '.$event->event_date.')" value="'. html_escape($event->event_id) .'" >'. html_escape($event->event_name) .'</option>';
                           }
                          ?>
                     </select>
                 </div>
             </div>
 
-            <div class="form-group row">
-              <div class="col-md-2 col-form-label"> 
-                <label for="ticketname">Ticket Name</label>
+            <div class="form-group row" id="tic_hide">
+							<div class="col-md-2 col-form-label">
+								<label for="eventname">Ticket Name</label>
+							</div>
+							<div class="col-md-4 col-md-offset-4">
+									<select class="form-control" name="ticketname" id="sel_tic">
+										 
+									</select>
+							</div>
+						</div>
+            
+            <div class="form-group row" id="tamount_hide">
+              <div class="col-md-2 col-form-label">
+                 <?php  echo form_label('Total Amount','tamount'); ?>
               </div>
-               <div class="col-md-4 col-md-offset-4">  
-                    <select class="selectpicker form-control" name="ticketname" data-live-search="true">
-                  
-                      <?php   
-                          foreach ($tickets as $ticket) {
-                            
-                            echo '<option data-subtext="Total Tickets : '. html_escape($ticket->ticket_limit) .'" value="'. html_escape($ticket->ticket_id) .'" >'. html_escape($ticket->ticket_name) .' ('.html_escape($currency).' '.html_escape($ticket->ticket_price).')   </option>';
-                          }
-                         ?>
-                    </select>
-                </div>
+              <div class="col-md-4 col-md-offset-4">
+                <?php 
+                    $data = array(
+                      'class' => 'form-control',
+                      'name' => 'tamount',
+                      'type' => 'text',
+                      'id' => 'tamount',
+                      'value' => $currency.' 0',
+                      'disabled' => TRUE
+                    );
+                    echo form_input($data);    
+                 ?>
+              </div>
             </div>
 
             <div class="form-group row">
@@ -173,7 +192,7 @@
                       'name' => 'pamount',
                       'type' => 'number',
                       'id' => 'pamount',
-                      'placeholder' => 'Paid Amount' 
+                      'placeholder' => $currency.' 0'
                     );
                     echo form_input($data);    
                  ?>

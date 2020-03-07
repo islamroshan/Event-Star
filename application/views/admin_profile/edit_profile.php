@@ -1,15 +1,7 @@
 <?php if($this->session->userdata('is_logged_in')): ?>
 <div class="card">
-  <div class="card-header">Edit Profile</div>
+  <div class="card-header"><i class="fas fa-table"></i> Edit Profile</div>
   <div class="card-body">
-    <?php if(validation_errors()): ?>
-      <div class="alert alert-danger alert-dismissible fade show pb-0" role="alert">
-          <?php echo validation_errors(); ?>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
-      </div>    
-    <?php endif;?>
     <?php 
       foreach ($user_detail as $user) {
           $user_data = array(
@@ -57,37 +49,43 @@
         </div>
      </div>
      <div class="form-group">
-        <div class="form-label-group">
-          <?php 
-           $data = array(
-            'class' => 'form-control',
-            'id' => 'inputEmail',
-            'value' =>  html_escape($user_data['email']),
-            'placeholder' => '',
-            'name' => 'useremail'
-           );
-           echo form_input($data);
-           echo form_label('Email address','inputEmail');
-           ?>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-label-group">
+            <?php 
+            $data = array(
+              'class' => 'form-control',
+              'id' => 'inputEmail',
+              'value' =>  html_escape($user_data['email']),
+              'placeholder' => '',
+              'name' => 'useremail'
+            );
+            echo form_input($data);
+            echo form_label('Email address','inputEmail');
+            ?>
+            <?php echo form_error('useremail', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-label-group">
+            <?php 
+                $data = array(
+                  'class' => 'form-control',
+                  'name' => 'password',
+                  'requried' => 'requried',
+                  'id' => 'inputPassword',
+                  'placeholder' => '' 
+                );
+                echo form_password($data);
+                echo form_label('Password','inputPassword');
+            ?>
+            <?php echo form_error('password', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
+          </div>
         </div>
       </div>
+     </div>
       <div class="form-group">
         <div class="form-row">
-          <div class="col-md-6">
-            <div class="form-label-group">
-             <?php 
-                 $data = array(
-                   'class' => 'form-control',
-                   'name' => 'password',
-                   'requried' => 'requried',
-                   'id' => 'inputPassword',
-                   'placeholder' => '' 
-                 );
-                 echo form_password($data);
-                 echo form_label('Password','inputPassword');
-              ?>
-              </div>
-           </div>
            <div class="col-md-6">
              <div class="form-label-group">
               <?php 
@@ -100,7 +98,25 @@
                 echo form_password($data);
                 echo form_label('Confirm Password','confirmPassword');
                ?>
+               <?php echo form_error('confirmpassword', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
                </div>
+            </div>
+            <div class="col-md-6">
+              <?php if($this->session->userdata('user_role') == 'admin'): ?>
+                <div class="form-label-group">
+                  <?php 
+                      $data = array(
+                      'class' => 'form-control',
+                      'name' => 'pin',
+                      'id' => 'pin',
+                      'placeholder' => ''
+                    );
+                    echo form_password($data);
+                    echo form_label('Enter Pin','pin');
+                  ?>
+                  <?php echo form_error('pin', '<div class="text-danger pt-1 font-italic">', '</div>'); ?>
+                </div>
+              <?php endif; ?>
             </div>
          </div>
       </div>
@@ -108,7 +124,7 @@
       <div class="form-group">
         <?php 
           $data = array(
-            'class' => 'btn btn-outline-primary',
+            'class' => 'btn btn-outline-primary edit_verification',
             'name' => 'update_profile',
             'value' => 'Update'
           );

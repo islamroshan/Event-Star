@@ -15,17 +15,34 @@ class Edit_guest_controller extends CI_Controller {
 
     //Update Event
     public function update_guest($guest_id)
-    {
-        $guest_detail = $this->input->post();
-        $query = $this->guest_model->update_guest($guest_detail,$guest_id);
-        if($query)
-        {
-            $this->session->set_flashdata('guest_updated','Guest Has Been Updated');
-            redirect('guest/guest_list_controller');
+    {   
+       //CHECKING THE VALIDATION
+       $this->form_validation->set_rules('guestname','event name','trim|required');
+       $this->form_validation->set_rules('phone','contact number','trim|required');
+       $this->form_validation->set_rules('address','address','trim|required');
+
+		if($this->form_validation->run() == FALSE)
+		{
+            $data['event_list'] = $this->event_model->get_all_events();
+            $data['currency'] = $this->setting_model->get_currency();
+            $data['ticket_list'] = $this->ticket_model->get_all_tickets();
+            $data['guest_detail'] = $this->guest_model->get_guest_by_id($guest_id);
+			$data['main_view'] = 'guest/edit_guest';
+            $this->load->view('layouts/main',$data);
         }
-        else
-        {
-            redirect('dashboard_controller');
+        else 
+        {	
+            $guest_detail = $this->input->post();
+            $query = $this->guest_model->update_guest($guest_detail,$guest_id);
+            if($query)
+            {
+                $this->session->set_flashdata('guest_updated','Guest Has Been Updated');
+                redirect('guest/guest_list_controller');
+            }
+            else
+            {
+                redirect('dashboard_controller');
+            }
         }
     }
 
